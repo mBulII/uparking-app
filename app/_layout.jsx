@@ -7,6 +7,7 @@ const Layout = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="home/index" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
   );
