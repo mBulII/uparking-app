@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
-import { styles } from "../../styles/Home";
+import { styles } from "../../styles/home";
 import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 
 export default function welcomeScreen() {
+  const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {
@@ -31,9 +32,11 @@ export default function welcomeScreen() {
       <View style={styles.content}></View>
 
       <View style={styles.navbarContainer}>
-        <FontAwesome name="user-plus" size={30} color="white" />
-        <MaterialIcons name="menu-book" size={30} color="white" />
-        <FontAwesome6 name="chalkboard-user" size={30} color="white" />
+        <TouchableOpacity onPress={() => router.push("signUp")}>
+          <FontAwesome name="user-plus" style={styles.navbarIcon} />
+        </TouchableOpacity>
+        <MaterialIcons name="menu-book" style={styles.navbarIcon} />
+        <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
       </View>
     </View>
   );

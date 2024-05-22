@@ -35,4 +35,8 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     height: hp(10),
   },
+  navbarIcon: {
+    fontSize: hp(5),
+    color: colors.bg,
+  },
 });

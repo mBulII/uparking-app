@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
-import { styles } from "../styles/Welcome";
+import { styles } from "../styles/welcome";
 import * as NavigationBar from "expo-navigation-bar";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function welcomeScreen() {
+  const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {
@@ -19,7 +20,6 @@ export default function welcomeScreen() {
     setNavigationBarColor();
   }, []);
 
-  const router = useRouter();
   return (
     <View style={styles.container}>
       <Image
@@ -42,9 +42,12 @@ export default function welcomeScreen() {
           source={require("../assets/images/appName.png")}
           style={styles.appImage}
         />
-        <Pressable style={styles.button} onPress={() => router.push("home")}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("home")}
+        >
           <Text style={styles.text}>Comenzar</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );
