@@ -36,7 +36,9 @@ export default function welcomeScreen() {
           <FontAwesome name="user-plus" style={styles.navbarIcon} />
         </TouchableOpacity>
         <MaterialIcons name="menu-book" style={styles.navbarIcon} />
-        <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
+        <TouchableOpacity onPress={() => router.push("comments")}>
+          <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
+        </TouchableOpacity>
       </View>
     </View>
   );

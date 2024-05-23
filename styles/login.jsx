@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     padding: 6.21,
     paddingLeft: wp(10),
     color: colors.text,
-    borderColor: "#CCCCCC",
+    borderColor: colors.grey,
     borderRadius: 20,
     width: wp(93),
   },
@@ -104,7 +104,7 @@ export const styles = StyleSheet.create({
     paddingBottom: hp(1.1),
   },
   bottomText1: {
-    color: "#CCCCCC",
+    color: colors.grey,
     fontSize: 15,
   },
   bottomText2: {
