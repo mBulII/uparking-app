@@ -13,7 +13,7 @@ import { styles } from "../../styles/login";
 import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
-export default function welcomeScreen() {
+export default function loginScreen() {
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {

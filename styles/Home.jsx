@@ -25,6 +25,58 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
+  parkingLot: {
+    width: wp(20),
+    height: hp(5),
+    backgroundColor: colors.red,
+  },
+  modalContent: {
+    width: wp(90),
+    height: hp(40),
+    backgroundColor: colors.bg,
+    borderRadius: 15,
+    position: "relative",
+  },
+  closeIcon: {
+    position: "absolute",
+    right: wp(3),
+    top: hp(1),
+    color: colors.main,
+    fontSize: hp(4),
+  },
+  alertIcon: {
+    position: "absolute",
+    right: wp(5),
+    top: hp(6),
+    fontSize: hp(7),
+  },
+  modalHeader: {
+    flexDirection: "row",
+    marginLeft: wp(5),
+    marginTop: hp(5),
+    height: hp(10),
+  },
+  modalTextTitle1: {
+    fontSize: hp(3.6),
+    color: colors.text,
+  },
+  modalTextTitle2: {
+    fontSize: hp(3.6),
+    color: colors.accent,
+  },
+  modalText: {
+    marginBottom: hp(3),
+    color: colors.text,
+    fontSize: hp(2),
+    marginLeft: wp(5),
+  },
+  modalMessage: {
+    marginTop: hp(3),
+    color: colors.accent,
+    fontSize: hp(3.6),
+    alignSelf: "center",
+  },
+
   navbarContainer: {
     backgroundColor: colors.main,
     flexDirection: "row",

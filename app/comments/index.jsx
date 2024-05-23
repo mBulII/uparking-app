@@ -14,7 +14,7 @@ import { styles } from "../../styles/comments";
 import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome } from "@expo/vector-icons";
 
-export default function welcomeScreen() {
+export default function commentsScreen() {
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
@@ -76,7 +76,10 @@ export default function welcomeScreen() {
           <TouchableOpacity style={styles.button1}>
             <Text style={styles.button1Text}>Enviar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button2} onPress={() => router.push("home")}>
+          <TouchableOpacity
+            style={styles.button2}
+            onPress={() => router.push("home")}
+          >
             <Text style={styles.button2Text}>Volver al inicio</Text>
           </TouchableOpacity>
         </View>
