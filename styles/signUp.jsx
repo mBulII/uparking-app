@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
   },
   formGroup: {
     position: "relative",
-    marginBottom: hp(1.8),
+    marginBottom: hp(1.6),
     alignSelf: "center",
   },
   formIcon: {
@@ -58,11 +58,11 @@ export const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     left: wp(3.5),
-    top: hp(1),
+    top: hp(0.7),
   },
   input: {
     borderWidth: 1,
-    padding: 6.21,
+    height: hp(4.2),
     paddingLeft: wp(10),
     color: colors.text,
     borderColor: colors.grey,
@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
   bottomTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    paddingBottom: hp(1.1),
+    marginBottom: hp(5.3),
   },
   bottomText1: {
     color: colors.grey,

@@ -28,7 +28,7 @@ export default function loginScreen() {
   }, []);
 
   return (
-    <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <TouchableOpacity onPress={() => router.push("home")}>
         <FontAwesome
           name="home"

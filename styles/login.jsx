@@ -101,7 +101,7 @@ export const styles = StyleSheet.create({
   bottomTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    paddingBottom: hp(1.1),
+    marginBottom: hp(5.3),
   },
   bottomText1: {
     color: colors.grey,

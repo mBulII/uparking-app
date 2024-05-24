@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { registerUser } from "../../constants/api";
 
 import { styles } from "../../styles/signUp";
 import * as NavigationBar from "expo-navigation-bar";
@@ -27,8 +29,40 @@ export default function signUpScreen() {
     setNavigationBarColor();
   }, []);
 
+  const [formData, setFormData] = useState({
+    rut: "",
+    p_nombre: "",
+    s_nombre: "",
+    p_apellido: "",
+    s_apellido: "",
+    email: "",
+    password1: "",
+    password2: "",
+  });
+  const handleInputChange = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async () => {
+    try {
+      const response = await registerUser(formData);
+      Alert.alert(
+        "Registration Successful",
+        "You have registered successfully!"
+      );
+    } catch (error) {
+      let errorMessage = "Something went wrong!";
+      if (error.response && error.response.data) {
+        errorMessage = Object.values(error.response.data).flat().join(", ");
+      }
+      Alert.alert("Registration Failed", errorMessage);
+    }
+  };
+
   return (
-    <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <TouchableOpacity onPress={() => router.push("home")}>
         <FontAwesome
           name="home"
@@ -46,6 +80,18 @@ export default function signUpScreen() {
         <Text style={styles.formTitle}>REGISTRATE</Text>
         <Text style={styles.formSubheading}>Por favor valida tu cuenta</Text>
 
+        <Text style={styles.labelText}>RUT</Text>
+        <View style={styles.formGroup}>
+          <FontAwesome name="user" style={styles.formIcon} />
+          <TextInput
+            style={styles.input}
+            placeholder="RUT"
+            placeholderTextColor="#CCCCCC"
+            value={formData.rut}
+            onChangeText={(value) => handleInputChange("rut", value)}
+          />
+        </View>
+
         <Text style={styles.labelText}>Nombre</Text>
         <View style={styles.formGroup}>
           <FontAwesome name="user" style={styles.formIcon} />
@@ -53,6 +99,8 @@ export default function signUpScreen() {
             style={styles.input}
             placeholder="Nombre"
             placeholderTextColor="#CCCCCC"
+            value={formData.p_nombre}
+            onChangeText={(value) => handleInputChange("p_nombre", value)}
           />
         </View>
 
@@ -63,6 +111,8 @@ export default function signUpScreen() {
             style={styles.input}
             placeholder="Segundo nombre"
             placeholderTextColor="#CCCCCC"
+            value={formData.s_nombre}
+            onChangeText={(value) => handleInputChange("s_nombre", value)}
           />
         </View>
 
@@ -73,6 +123,8 @@ export default function signUpScreen() {
             style={styles.input}
             placeholder="Apellido"
             placeholderTextColor="#CCCCCC"
+            value={formData.p_apellido}
+            onChangeText={(value) => handleInputChange("p_apellido", value)}
           />
         </View>
 
@@ -83,6 +135,8 @@ export default function signUpScreen() {
             style={styles.input}
             placeholder="Segundo apellido"
             placeholderTextColor="#CCCCCC"
+            value={formData.s_apellido}
+            onChangeText={(value) => handleInputChange("s_apellido", value)}
           />
         </View>
 
@@ -93,6 +147,8 @@ export default function signUpScreen() {
             style={styles.input}
             placeholder="Correo"
             placeholderTextColor="#CCCCCC"
+            value={formData.email}
+            onChangeText={(value) => handleInputChange("email", value)}
           />
         </View>
 
@@ -104,6 +160,8 @@ export default function signUpScreen() {
             placeholder="Contraseña"
             placeholderTextColor="#CCCCCC"
             secureTextEntry={true}
+            value={formData.password1}
+            onChangeText={(value) => handleInputChange("password1", value)}
           />
         </View>
 
@@ -115,11 +173,13 @@ export default function signUpScreen() {
             placeholder="Confirmar contraseña"
             placeholderTextColor="#CCCCCC"
             secureTextEntry={true}
+            value={formData.password2}
+            onChangeText={(value) => handleInputChange("password2", value)}
           />
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Crear Cuenta</Text>
           </TouchableOpacity>
         </View>
