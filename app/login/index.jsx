@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { loginUser } from "../../constants/api";
 
 import { styles } from "../../styles/login";
 import * as NavigationBar from "expo-navigation-bar";
@@ -26,6 +28,32 @@ export default function loginScreen() {
     };
     setNavigationBarColor();
   }, []);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleInputChange = (name, value) => {
+    if (name === "email") {
+      value = value.toLowerCase();
+    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async () => {
+    try {
+      const response = await loginUser(formData);
+      router.push("home");
+    } catch (error) {
+      let errorMessage = "Something went wrong!";
+      if (error.response && error.response.data) {
+        errorMessage = Object.values(error.response.data).flat().join(", ");
+      }
+      Alert.alert("Login Failed", errorMessage);
+    }
+  };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -53,6 +81,9 @@ export default function loginScreen() {
             style={styles.input}
             placeholder="Correo"
             placeholderTextColor="#CCCCCC"
+            value={formData.email}
+            onChangeText={(value) => handleInputChange("email", value)}
+            autoCapitalize="none"
           />
         </View>
 
@@ -64,6 +95,8 @@ export default function loginScreen() {
             placeholder="Contraseña"
             placeholderTextColor="#CCCCCC"
             secureTextEntry={true}
+            value={formData.password}
+            onChangeText={(value) => handleInputChange("password", value)}
           />
         </View>
         <TouchableOpacity style={styles.forgotContainer}>
@@ -71,7 +104,7 @@ export default function loginScreen() {
         </TouchableOpacity>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Iniciar Sesión</Text>
           </TouchableOpacity>
         </View>

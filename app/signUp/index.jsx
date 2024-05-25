@@ -40,6 +40,9 @@ export default function signUpScreen() {
     password2: "",
   });
   const handleInputChange = (name, value) => {
+    if (name === "email") {
+      value = value.toLowerCase();
+    }
     setFormData({
       ...formData,
       [name]: value,
@@ -48,10 +51,7 @@ export default function signUpScreen() {
   const handleSubmit = async () => {
     try {
       const response = await registerUser(formData);
-      Alert.alert(
-        "Registration Successful",
-        "You have registered successfully!"
-      );
+      router.push("home");
     } catch (error) {
       let errorMessage = "Something went wrong!";
       if (error.response && error.response.data) {
@@ -149,6 +149,7 @@ export default function signUpScreen() {
             placeholderTextColor="#CCCCCC"
             value={formData.email}
             onChangeText={(value) => handleInputChange("email", value)}
+            autoCapitalize="none"
           />
         </View>
 
