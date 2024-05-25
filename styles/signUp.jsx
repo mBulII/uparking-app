@@ -69,6 +69,11 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     width: wp(93),
   },
+  errorText: {
+    fontSize: hp(1.5),
+    color: colors.red,
+    marginLeft: wp(4),
+  },
 
   buttonContainer: {
     alignSelf: "center",
@@ -99,5 +104,30 @@ export const styles = StyleSheet.create({
   bottomText2: {
     color: colors.accent,
     fontSize: 15,
+  },
+
+  feedbackContainer: {
+    position: "absolute",
+    top: hp(30),
+    left: wp(15),
+    backgroundColor: colors.main,
+    borderRadius: 20,
+    height: hp(30),
+    width: wp(70),
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+  feedbackText: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.bg,
+    textAlign: "center",
+    paddingBottom: 30,
+  },
+  feedBackClose: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.red,
+    textAlign: "center",
   },
 });

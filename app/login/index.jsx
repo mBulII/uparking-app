@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { loginUser } from "../../constants/api";
+import { Controller, useForm } from "react-hook-form";
+import { email, loginPassword } from "../../constants/validation";
 
 import { styles } from "../../styles/login";
 import * as NavigationBar from "expo-navigation-bar";
@@ -29,31 +31,23 @@ export default function loginScreen() {
     setNavigationBarColor();
   }, []);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const handleInputChange = (name, value) => {
-    if (name === "email") {
-      value = value.toLowerCase();
-    }
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const onTouch = () => {
+    setFeedbackMessage("");
   };
-  const handleSubmit = async () => {
+  const handleAccountCreation = async (data) => {
     try {
-      const response = await loginUser(formData);
+      const response = await loginUser(data);
       router.push("home");
     } catch (error) {
-      let errorMessage = "Something went wrong!";
-      if (error.response && error.response.data) {
-        errorMessage = Object.values(error.response.data).flat().join(", ");
-      }
-      Alert.alert("Login Failed", errorMessage);
+      setFeedbackMessage("Los datos proporcionados no son válidos");
     }
   };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -77,26 +71,54 @@ export default function loginScreen() {
         <Text style={styles.labelText}>Correo</Text>
         <View style={styles.formGroup}>
           <FontAwesome name="envelope" style={styles.formIcon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Correo"
-            placeholderTextColor="#CCCCCC"
-            value={formData.email}
-            onChangeText={(value) => handleInputChange("email", value)}
-            autoCapitalize="none"
+          <Controller
+            control={control}
+            name="email"
+            rules={email}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Correo"
+                  placeholderTextColor="#CCCCCC"
+                  value={value}
+                  onBlur={onBlur}
+                  onChangeText={(value) => onChange(value.toLowerCase().trim())}
+                  autoCapitalize="none"
+                />
+                {errors.email && (
+                  <Text style={styles.errorText}>{errors.email.message}</Text>
+                )}
+              </>
+            )}
           />
         </View>
 
         <Text style={styles.labelText}>Contraseña</Text>
         <View style={styles.formGroup}>
           <FontAwesome5 name="key" style={styles.formIcon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Contraseña"
-            placeholderTextColor="#CCCCCC"
-            secureTextEntry={true}
-            value={formData.password}
-            onChangeText={(value) => handleInputChange("password", value)}
+          <Controller
+            control={control}
+            name="password"
+            rules={loginPassword}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Contraseña"
+                  placeholderTextColor="#CCCCCC"
+                  secureTextEntry={true}
+                  value={value}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                />
+                {errors.password && (
+                  <Text style={styles.errorText}>
+                    {errors.password.message}
+                  </Text>
+                )}
+              </>
+            )}
           />
         </View>
         <TouchableOpacity style={styles.forgotContainer}>
@@ -104,7 +126,10 @@ export default function loginScreen() {
         </TouchableOpacity>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleSubmit(handleAccountCreation)}
+          >
             <Text style={styles.buttonText}>Iniciar Sesión</Text>
           </TouchableOpacity>
         </View>
@@ -115,6 +140,14 @@ export default function loginScreen() {
           </TouchableOpacity>
         </View>
       </View>
+      {feedbackMessage ? (
+        <View style={styles.feedbackContainer}>
+          <Text style={styles.feedbackText}>{feedbackMessage}</Text>
+          <TouchableOpacity onPress={onTouch}>
+            <Text style={styles.feedBackClose}>Cerrar</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </ScrollView>
   );
 }
