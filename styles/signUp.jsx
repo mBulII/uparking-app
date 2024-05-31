@@ -122,12 +122,19 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.bg,
     textAlign: "center",
-    paddingBottom: 30,
   },
   feedBackClose: {
     fontSize: hp(3),
     fontWeight: "bold",
     color: colors.red,
     textAlign: "center",
+    paddingTop: 30,
+  },
+  feedBackGoToLogin: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.red,
+    textAlign: "center",
+    paddingTop: 1,
   },
 });

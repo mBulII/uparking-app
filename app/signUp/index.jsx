@@ -41,16 +41,27 @@ export default function signUpScreen() {
   }, []);
 
   const [feedbackMessage, setFeedbackMessage] = React.useState("");
+  const [accountCreated, setAccountCreated] = useState(false);
   const onTouch = () => {
     setFeedbackMessage("");
+    setAccountCreated(false);
   };
   const handleAccountCreation = async (data) => {
     try {
       const response = await registerUser(data);
-      router.push("home");
+      setFeedbackMessage(
+        "Tu cuenta se ha creado de forma exitosa, puedes iniciar sesión"
+      );
+      setAccountCreated(true);
     } catch (error) {
       setFeedbackMessage("No se pudo crear tu cuenta, intentalo denuevo");
     }
+  };
+  const handleTestButtonPress = () => {
+    setAccountCreated(true);
+    setFeedbackMessage(
+      "Tu cuenta se ha creado de forma exitosa, puedes iniciar sesión"
+    );
   };
   const {
     control,
@@ -310,9 +321,15 @@ export default function signUpScreen() {
       {feedbackMessage ? (
         <View style={styles.feedbackContainer}>
           <Text style={styles.feedbackText}>{feedbackMessage}</Text>
-          <TouchableOpacity onPress={onTouch}>
-            <Text style={styles.feedBackClose}>Cerrar</Text>
-          </TouchableOpacity>
+          {accountCreated ? (
+            <TouchableOpacity onPress={() => router.push("login")}>
+              <Text style={styles.feedBackGoToLogin}>aquí</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={onTouch}>
+              <Text style={styles.feedBackClose}>Cerrar</Text>
+            </TouchableOpacity>
+          )}
         </View>
       ) : null}
     </ScrollView>
