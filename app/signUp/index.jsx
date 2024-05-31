@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { registerUser } from "../../constants/api";
@@ -46,9 +45,10 @@ export default function signUpScreen() {
     setFeedbackMessage("");
     setAccountCreated(false);
   };
-  const handleAccountCreation = async (data) => {
+
+  const handleAccountCreation = async (formData) => {
     try {
-      const response = await registerUser(data);
+      const response = await registerUser(formData);
       setFeedbackMessage(
         "Tu cuenta se ha creado de forma exitosa, puedes iniciar sesión"
       );
@@ -57,12 +57,7 @@ export default function signUpScreen() {
       setFeedbackMessage("No se pudo crear tu cuenta, intentalo denuevo");
     }
   };
-  const handleTestButtonPress = () => {
-    setAccountCreated(true);
-    setFeedbackMessage(
-      "Tu cuenta se ha creado de forma exitosa, puedes iniciar sesión"
-    );
-  };
+
   const {
     control,
     handleSubmit,

@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { loginUser } from "../../constants/api";
 import { Controller, useForm } from "react-hook-form";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { loginUser } from "../../constants/api";
 import { email, loginPassword } from "../../constants/validation";
 
 import { styles } from "../../styles/login";
@@ -35,14 +35,18 @@ export default function loginScreen() {
   const onTouch = () => {
     setFeedbackMessage("");
   };
-  const handleAccountCreation = async (data) => {
+
+  const handleAccountLogin = async (formData) => {
     try {
-      const response = await loginUser(data);
+      const response = await loginUser(formData);
+      const accessToken = response.access;
+      AsyncStorage.setItem("accessToken", accessToken);
       router.push("home");
     } catch (error) {
       setFeedbackMessage("Los datos proporcionados no son válidos");
     }
   };
+
   const {
     control,
     handleSubmit,
@@ -128,7 +132,7 @@ export default function loginScreen() {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={handleSubmit(handleAccountCreation)}
+            onPress={handleSubmit(handleAccountLogin)}
           >
             <Text style={styles.buttonText}>Iniciar Sesión</Text>
           </TouchableOpacity>
