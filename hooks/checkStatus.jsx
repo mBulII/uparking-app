@@ -1,27 +1,25 @@
 import { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { verifyToken } from "../constants/api";
+import { userData } from "./userData";
 
 export const checkStatus = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const user = userData();
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      try {
-        const accessToken = await AsyncStorage.getItem("accessToken");
-        if (accessToken) {
-          await verifyToken(accessToken);
+      if (user) {
+        try {
+          await verifyToken(user.access);
           setIsLoggedIn(true);
-        } else {
+        } catch (error) {
           setIsLoggedIn(false);
+          console.error("Token verification failed:", error);
         }
-      } catch (error) {
-        setIsLoggedIn(false);
-        console.error("Token verification failed:", error);
       }
     };
     checkLoginStatus();
-  }, []);
+  }, [user]);
 
   return isLoggedIn;
 };

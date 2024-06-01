@@ -39,8 +39,8 @@ export default function loginScreen() {
   const handleAccountLogin = async (formData) => {
     try {
       const response = await loginUser(formData);
-      const accessToken = response.access;
-      AsyncStorage.setItem("accessToken", accessToken);
+      const userData = response;
+      AsyncStorage.setItem("userData", JSON.stringify(userData));
       router.push("home");
     } catch (error) {
       setFeedbackMessage("Los datos proporcionados no son válidos");
