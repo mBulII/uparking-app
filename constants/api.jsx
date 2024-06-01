@@ -1,4 +1,5 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const URL = "http://192.168.43.74:8000/auth";
 
@@ -15,6 +16,15 @@ export const loginUser = async (formData) => {
   try {
     const response = await axios.post(`${URL}/login/`, formData);
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    await axios.post(`${URL}/logout/`);
+    await AsyncStorage.removeItem("userData");
   } catch (error) {
     throw error;
   }

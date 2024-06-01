@@ -11,6 +11,7 @@ const Layout = () => {
         <Stack.Screen name="signUp/index" options={{ headerShown: false }} />
         <Stack.Screen name="login/index" options={{ headerShown: false }} />
         <Stack.Screen name="comments/index" options={{ headerShown: false }} />
+        <Stack.Screen name="myAccount/index" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
   );

@@ -148,8 +148,14 @@ export default function homeScreen() {
 
       {isLoggedIn ? (
         <View style={styles.navbarContainer}>
-          <TouchableOpacity onPress={() => router.push("signUp")}>
-            <FontAwesome name="user-plus" style={styles.navbarIcon} />
+          <TouchableOpacity onPress={() => router.push("myAccount")}>
+            <FontAwesome name="user" style={styles.navbarIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialIcons name="menu-book" style={styles.navbarIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <FontAwesome name="bell" style={styles.navbarIcon} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push("comments")}>
             <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
@@ -160,7 +166,9 @@ export default function homeScreen() {
           <TouchableOpacity onPress={() => router.push("signUp")}>
             <FontAwesome name="user-plus" style={styles.navbarIcon} />
           </TouchableOpacity>
-          <MaterialIcons name="menu-book" style={styles.navbarIcon} />
+          <TouchableOpacity>
+            <MaterialIcons name="menu-book" style={styles.navbarIcon} />
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push("comments")}>
             <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
           </TouchableOpacity>
