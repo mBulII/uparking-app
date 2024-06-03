@@ -40,14 +40,12 @@ export default function commentsScreen() {
   return (
     <TouchableWithoutFeedback onPress={handleOutside}>
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Image
-            source={require("../../assets/images/appName.png")}
-            style={styles.headerLogo}
-          />
-        </View>
+        <Image
+          source={require("../../assets/images/appName.png")}
+          style={styles.headerLogo}
+        />
 
-        <View styles={styles.bodyContainer}>
+        <View style={styles.contentContainer}>
           <Text style={styles.textTitle}>
             Tienes algún comentario que realizar?
           </Text>

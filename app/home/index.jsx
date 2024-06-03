@@ -154,7 +154,7 @@ export default function homeScreen() {
           <TouchableOpacity>
             <MaterialIcons name="menu-book" style={styles.navbarIcon} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push("notification")}>
             <FontAwesome name="bell" style={styles.navbarIcon} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push("comments")}>

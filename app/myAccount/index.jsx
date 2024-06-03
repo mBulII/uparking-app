@@ -17,7 +17,7 @@ import { styles } from "../../styles/myAccount";
 import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome } from "@expo/vector-icons";
 
-export default function myAccount() {
+export default function myAccountScreen() {
   const isLoggedIn = checkStatus();
   const user = userData();
   const router = useRouter();
