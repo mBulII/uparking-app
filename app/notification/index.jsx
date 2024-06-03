@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Keyboard,
-  TouchableWithoutFeedback,
-  ScrollView,
-} from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { checkStatus } from "../../hooks/checkStatus";
 import { userData } from "../../hooks/userData";
 
 import { styles } from "../../styles/notification";
 import * as NavigationBar from "expo-navigation-bar";
-import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function notificationScreen() {
   const isLoggedIn = checkStatus();

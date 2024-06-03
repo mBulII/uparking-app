@@ -15,7 +15,6 @@ import { logoutUser } from "../../constants/api";
 
 import { styles } from "../../styles/myAccount";
 import * as NavigationBar from "expo-navigation-bar";
-import { FontAwesome } from "@expo/vector-icons";
 
 export default function myAccountScreen() {
   const isLoggedIn = checkStatus();
@@ -54,13 +53,11 @@ export default function myAccountScreen() {
   return (
     <TouchableWithoutFeedback onPress={handleOutside}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => router.push("home")}>
-          <FontAwesome name="home" style={styles.headerIcon} />
-        </TouchableOpacity>
         <Image
           source={require("../../assets/images/appName.png")}
           style={styles.headerLogo}
         />
+
         {isLoggedIn ? (
           <View style={styles.contentContainer}>
             <View style={styles.titleContainer}>

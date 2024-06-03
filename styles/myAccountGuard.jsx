@@ -34,42 +34,27 @@ export const styles = StyleSheet.create({
     color: colors.accent,
     fontSize: hp(3),
   },
-  subHeading: {
-    fontSize: hp(2),
-    color: colors.text,
-    marginBottom: hp(15),
-    marginLeft: wp(3),
-  },
 
-  labelText: {
-    color: colors.text,
-    fontSize: hp(2),
-    marginLeft: wp(5),
-    marginBottom: hp(1),
-  },
-  input: {
-    borderWidth: 1,
-    padding: 6.21,
-    color: colors.text,
-    borderColor: colors.grey,
-    borderRadius: 20,
-    width: wp(93),
-    alignSelf: "center",
-  },
-  saveButton: {
-    width: wp(50),
-    height: hp(5),
-    backgroundColor: colors.main,
-    alignSelf: "center",
-    alignItems: "center",
+  textIconContainer: {
     justifyContent: "center",
-    borderRadius: 12,
-    paddingHorizontal: 10,
-    marginTop: hp(5),
+    alignItems: "center",
+    marginTop: hp(13),
   },
-  saveButtonText: {
-    fontSize: hp(2),
-    color: colors.bg,
+  textContainer: {
+    flexDirection: "row",
+  },
+  text1: {
+    fontSize: hp(3),
+    color: colors.text,
+  },
+  text2: {
+    fontSize: hp(3),
+    color: colors.accent,
+  },
+  guardIcon: {
+    fontSize: hp(8),
+    color: colors.main,
+    marginTop: hp(7),
   },
 
   button1: {
@@ -82,7 +67,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: colors.main,
-    marginTop: hp(23),
+    marginTop: hp(28),
   },
   button1Text: {
     fontSize: hp(2),

@@ -15,6 +15,7 @@ import {
 
 export default function homeScreen() {
   const isLoggedIn = checkStatus();
+  const isGuard = true;
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
@@ -80,14 +81,12 @@ export default function homeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Image
-          source={require("../../assets/images/appName.png")}
-          style={styles.headerLogo}
-        />
-      </View>
+      <Image
+        source={require("../../assets/images/appName.png")}
+        style={styles.headerLogo}
+      />
 
-      <View style={styles.content}>
+      <View style={styles.contentContainer}>
         {parkingLots.map((lot) => {
           return (
             <TouchableOpacity
@@ -147,20 +146,37 @@ export default function homeScreen() {
       </View>
 
       {isLoggedIn ? (
-        <View style={styles.navbarContainer}>
-          <TouchableOpacity onPress={() => router.push("myAccount")}>
-            <FontAwesome name="user" style={styles.navbarIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <MaterialIcons name="menu-book" style={styles.navbarIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push("notification")}>
-            <FontAwesome name="bell" style={styles.navbarIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push("comments")}>
-            <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
-          </TouchableOpacity>
-        </View>
+        isGuard ? (
+          <View style={styles.navbarContainer}>
+            <TouchableOpacity onPress={() => router.push("myAccountGuard")}>
+              <FontAwesome6 name="user-shield" style={styles.navbarIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <MaterialIcons name="menu-book" style={styles.navbarIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("notification")}>
+              <FontAwesome name="bell" style={styles.navbarIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("comments")}>
+              <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.navbarContainer}>
+            <TouchableOpacity onPress={() => router.push("myAccount")}>
+              <FontAwesome name="user" style={styles.navbarIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <MaterialIcons name="menu-book" style={styles.navbarIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("notification")}>
+              <FontAwesome name="bell" style={styles.navbarIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("comments")}>
+              <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
+            </TouchableOpacity>
+          </View>
+        )
       ) : (
         <View style={styles.navbarContainer}>
           <TouchableOpacity onPress={() => router.push("signUp")}>

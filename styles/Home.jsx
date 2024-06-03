@@ -6,23 +6,19 @@ export const styles = StyleSheet.create({
   //main container
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
+    paddingTop: hp(5),
+    backgroundColor: colors.main,
   },
 
-  headerContainer: {
-    backgroundColor: colors.main,
-    width: wp(100),
-    height: hp(13),
-    justifyContent: "flex-end",
-  },
   headerLogo: {
     height: hp(8),
     width: wp(50),
     marginLeft: wp(3),
   },
 
-  content: {
+  contentContainer: {
     flex: 1,
+    backgroundColor: colors.bg,
   },
 
   parkingLot: {
