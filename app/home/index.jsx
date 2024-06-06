@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import Modal from "react-native-modal";
 import { checkStatus } from "../../hooks/checkStatus";
+import { checkRole } from "../../hooks/checkRole";
 
 import { styles } from "../../styles/home";
 import * as NavigationBar from "expo-navigation-bar";
@@ -15,7 +16,7 @@ import {
 
 export default function homeScreen() {
   const isLoggedIn = checkStatus();
-  const isGuard = true;
+  const isGuard = checkRole();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
@@ -62,19 +63,19 @@ export default function homeScreen() {
       return {
         icon: "alert-circle",
         color: "#E55252",
-        message: "asqueroso",
+        message: "Prefiera otro estacionamiento",
       };
     } else if (7 >= lotsLeft) {
       return {
         icon: "alert",
         color: "#DDDE7D",
-        message: "ma omeno",
+        message: "Capacidad media, estacionamiento parcial",
       };
     } else {
       return {
         icon: "checkmark-circle",
         color: "#81F777",
-        message: "de ruta",
+        message: "Muchos espacios disponibles",
       };
     }
   };
@@ -154,7 +155,7 @@ export default function homeScreen() {
             <TouchableOpacity>
               <MaterialIcons name="menu-book" style={styles.navbarIcon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push("notification")}>
+            <TouchableOpacity onPress={() => router.push("notificationGuard")}>
               <FontAwesome name="bell" style={styles.navbarIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => router.push("comments")}>
@@ -182,7 +183,7 @@ export default function homeScreen() {
           <TouchableOpacity onPress={() => router.push("signUp")}>
             <FontAwesome name="user-plus" style={styles.navbarIcon} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push("reportHistory")}>
             <MaterialIcons name="menu-book" style={styles.navbarIcon} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push("comments")}>
