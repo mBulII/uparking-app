@@ -183,7 +183,7 @@ export default function homeScreen() {
           <TouchableOpacity onPress={() => router.push("signUp")}>
             <FontAwesome name="user-plus" style={styles.navbarIcon} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push("reportHistory")}>
+          <TouchableOpacity>
             <MaterialIcons name="menu-book" style={styles.navbarIcon} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push("comments")}>
