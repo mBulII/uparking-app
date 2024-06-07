@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     marginLeft: wp(5),
   },
   modalMessage: {
-    marginTop: hp(3),
+    marginTop: hp(1),
     color: colors.accent,
     fontSize: hp(3.6),
     alignSelf: "center",

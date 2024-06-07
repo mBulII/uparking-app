@@ -1,7 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const URL = "http://127.0.0.1/api/auth";
+const URL = "http://192.168.43.74/api/auth";
 
 export const registerUser = async (formData) => {
   try {

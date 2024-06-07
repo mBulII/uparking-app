@@ -158,9 +158,6 @@ export default function homeScreen() {
             <TouchableOpacity onPress={() => router.push("notificationGuard")}>
               <FontAwesome name="bell" style={styles.navbarIcon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push("comments")}>
-              <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
-            </TouchableOpacity>
           </View>
         ) : (
           <View style={styles.navbarContainer}>

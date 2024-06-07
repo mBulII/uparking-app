@@ -62,7 +62,7 @@ export default function myAccountScreen() {
           <View style={styles.contentContainer}>
             <View style={styles.titleContainer}>
               <Text style={styles.title1}>Bienvenido</Text>
-              <Text style={styles.title2}> {user.user.pk}</Text>
+              <Text style={styles.title2}> {user.user.p_nombre}</Text>
             </View>
             <Text style={styles.subHeading}>Has enviado # comentarios</Text>
 

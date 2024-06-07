@@ -56,12 +56,7 @@ export default function loginScreen() {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <TouchableOpacity onPress={() => router.push("home")}>
-        <FontAwesome
-          name="home"
-          size={25}
-          color="white"
-          style={styles.headerIcon}
-        />
+        <FontAwesome name="home" style={styles.headerIcon} />
       </TouchableOpacity>
       <Image
         source={require("../../assets/images/appName.png")}

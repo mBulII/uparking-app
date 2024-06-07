@@ -20,6 +20,15 @@ const Layout = () => {
           name="myAccountGuard/index"
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="notificationGuard/index"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="addReport/index" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="reportHistory/index"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </SafeAreaView>
   );

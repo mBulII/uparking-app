@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
   },
 
   headerIcon: {
+    fontSize: hp(3),
+    color: colors.bg,
     marginLeft: wp(3),
   },
   headerLogo: {

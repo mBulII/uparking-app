@@ -45,7 +45,7 @@ export default function myAccountGuardScreen() {
         <View style={styles.contentContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title1}>Bienvenido</Text>
-            <Text style={styles.title2}> {user.user.pk}</Text>
+            <Text style={styles.title2}> {user.user.p_nombre}</Text>
           </View>
 
           <View style={styles.textIconContainer}>

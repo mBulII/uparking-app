@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { checkStatus } from "../../hooks/checkStatus";
-import { userData } from "../../hooks/userData";
 
 import { styles } from "../../styles/notification";
 import * as NavigationBar from "expo-navigation-bar";
@@ -10,7 +9,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function notificationScreen() {
   const isLoggedIn = checkStatus();
-  const user = userData();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
@@ -30,6 +28,7 @@ export default function notificationScreen() {
         source={require("../../assets/images/appName.png")}
         style={styles.headerLogo}
       />
+
       {isLoggedIn ? (
         <ScrollView
           style={styles.contentContainer}
@@ -43,7 +42,7 @@ export default function notificationScreen() {
               style={styles.notificationIcon}
             />
             <Text style={styles.notificationMessage}>
-              No hay notificaciones perrete
+              No hay notificaciones
             </Text>
           </View>
 
@@ -57,7 +56,7 @@ export default function notificationScreen() {
             />
             <Text style={styles.notificationMessage}>
               hola comon estas aver como se lorea este mensaje ahahahha
-              notificaciones perrete
+              notificaciones
             </Text>
           </View>
 
@@ -69,7 +68,7 @@ export default function notificationScreen() {
               style={styles.notificationIcon}
             />
             <Text style={styles.notificationMessage}>
-              No hay notificaciones perrete
+              No hay notificaciones
             </Text>
           </View>
 
@@ -82,7 +81,7 @@ export default function notificationScreen() {
             />
             <Text style={styles.notificationMessage}>
               hola comon estas aver como se lorea este mensaje ahahahha
-              notificaciones perrete
+              notificaciones
             </Text>
           </View>
         </ScrollView>
