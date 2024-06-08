@@ -6,7 +6,7 @@ import { styles } from "../../styles/signInRegister";
 import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome } from "@expo/vector-icons";
 
-export default function loginScreen() {
+export default function signInRegisterScreen() {
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {

@@ -21,6 +21,24 @@ export const loginUser = async (formData) => {
   }
 };
 
+export const passwordReset = async (formData) => {
+  try {
+    const response = await axios.post(`${URL}/password/reset/`, formData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const passwordChange = async (formData) => {
+  try {
+    const response = await axios.post(`${URL}/password/change/`, formData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const logoutUser = async () => {
   try {
     await axios.post(`${URL}/logout/`);

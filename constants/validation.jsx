@@ -62,6 +62,11 @@ export const confirmPassword = {
   validate: (value, { password1 }) =>
     value === password1 || "Las contraseñas deben ser iguales",
 };
+export const confirmNewPassword = {
+  required: "Este campo es obligatorio",
+  validate: (value, { new_password1 }) =>
+    value === new_password1 || "Las contraseñas deben ser iguales",
+};
 export const loginPassword = {
   required: "Este campo es obligatorio",
 };
