@@ -33,19 +33,14 @@ export const styles = StyleSheet.create({
     color: colors.text,
     fontWeight: "bold",
     fontSize: hp(5),
-    marginLeft: wp(2),
+    marginLeft: wp(3),
     marginTop: hp(2),
-  },
-  formSubheading: {
-    color: colors.text,
-    fontSize: hp(2),
-    marginBottom: hp(10),
-    marginLeft: wp(2),
+    marginBottom: hp(12),
   },
 
   labelText: {
     color: colors.text,
-    fontSize: 15,
+    fontSize: hp(1.7),
     fontWeight: "bold",
     marginLeft: wp(7),
   },
@@ -81,10 +76,10 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     marginRight: wp(5),
-    marginBottom: hp(34.5),
+    marginBottom: hp(33),
   },
   forgotText: {
-    fontSize: 15,
+    fontSize: hp(2),
     color: colors.accent,
   },
 
@@ -112,11 +107,11 @@ export const styles = StyleSheet.create({
   },
   bottomText1: {
     color: colors.grey,
-    fontSize: 15,
+    fontSize: hp(2),
   },
   bottomText2: {
     color: colors.accent,
-    fontSize: 15,
+    fontSize: hp(2),
   },
 
   feedbackContainer: {

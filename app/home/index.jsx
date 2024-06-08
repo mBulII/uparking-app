@@ -12,6 +12,7 @@ import {
   FontAwesome6,
   MaterialIcons,
   Ionicons,
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
 export default function homeScreen() {
@@ -156,7 +157,10 @@ export default function homeScreen() {
               <MaterialIcons name="menu-book" style={styles.navbarIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => router.push("notificationGuard")}>
-              <FontAwesome name="bell" style={styles.navbarIcon} />
+              <MaterialCommunityIcons
+                name="bell-plus"
+                style={styles.navbarIcon}
+              />
             </TouchableOpacity>
           </View>
         ) : (
@@ -177,7 +181,7 @@ export default function homeScreen() {
         )
       ) : (
         <View style={styles.navbarContainer}>
-          <TouchableOpacity onPress={() => router.push("signUp")}>
+          <TouchableOpacity onPress={() => router.push("signInRegister")}>
             <FontAwesome name="user-plus" style={styles.navbarIcon} />
           </TouchableOpacity>
           <TouchableOpacity>

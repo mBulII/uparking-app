@@ -65,7 +65,6 @@ export default function loginScreen() {
 
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>INGRESAR</Text>
-        <Text style={styles.formSubheading}>Por favor valida tu cuenta</Text>
 
         <Text style={styles.labelText}>Correo</Text>
         <View style={styles.formGroup}>

@@ -76,7 +76,6 @@ export default function signUpScreen() {
 
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>REGISTRATE</Text>
-        <Text style={styles.formSubheading}>Por favor valida tu cuenta</Text>
 
         <Text style={styles.labelText}>RUT</Text>
         <View style={styles.formGroup}>
