@@ -1,6 +1,6 @@
 # Bienvenido a la aplicación móvil de U-Parking 👋
 
-Este es un proyecto [Expo](https://expo.dev) creado con [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este es un proyecto que utiliza [React Native](https://reactnative.dev) y [Expo](https://expo.dev) creado con [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Comenzar
 
