@@ -4,6 +4,10 @@ import { colors } from "../constants/colors";
 
 export const styles = StyleSheet.create({
   //main container
+  mainContainer: {
+    flex: 1,
+    backgroundColor: colors.bg,
+  },
   container: {
     flex: 1,
     paddingTop: hp(5),
@@ -14,6 +18,7 @@ export const styles = StyleSheet.create({
     height: hp(8),
     width: wp(50),
     marginLeft: wp(3),
+    color: colors.main,
   },
 
   contentContainer: {

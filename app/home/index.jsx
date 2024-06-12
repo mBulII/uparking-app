@@ -82,69 +82,71 @@ export default function homeScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../../assets/images/appName.png")}
-        style={styles.headerLogo}
-      />
+    <View style={styles.mainContainer}>
+      <View style={styles.container}>
+        <Image
+          source={require("../../assets/images/appName.png")}
+          style={styles.headerLogo}
+        />
 
-      <View style={styles.contentContainer}>
-        {parkingLots.map((lot) => {
-          return (
-            <TouchableOpacity
-              key={lot.id}
-              style={styles.parkingLot}
-              onPress={() => toggleModal(lot)}
-            >
-              <Text>{lot.name}</Text>
-            </TouchableOpacity>
-          );
-        })}
-        <Modal
-          isVisible={isModalVisible}
-          onBackdropPress={() => toggleModal()}
-          onSwipeComplete={() => toggleModal()}
-          swipeDirection="down"
-          animationIn="slideInUp"
-          animationOut="slideOutDown"
-          backdropTransitionOutTiming={0}
-        >
-          <View style={styles.modalContent}>
-            <TouchableOpacity onPress={toggleModal}>
-              <FontAwesome name="times-circle" style={styles.closeIcon} />
-            </TouchableOpacity>
-            {selectedParkingLot && (
-              <>
-                <Ionicons
-                  name={getIconAndMessage(selectedParkingLot).icon}
-                  color={getIconAndMessage(selectedParkingLot).color}
-                  style={styles.alertIcon}
-                />
-                <View style={styles.modalHeader}>
-                  <Text style={styles.modalTextTitle1}>
-                    Estacionamiento{" "}
-                    <Text style={styles.modalTextTitle2}>
-                      {selectedParkingLot.name}
+        <View style={styles.contentContainer}>
+          {parkingLots.map((lot) => {
+            return (
+              <TouchableOpacity
+                key={lot.id}
+                style={styles.parkingLot}
+                onPress={() => toggleModal(lot)}
+              >
+                <Text>{lot.name}</Text>
+              </TouchableOpacity>
+            );
+          })}
+          <Modal
+            isVisible={isModalVisible}
+            onBackdropPress={() => toggleModal()}
+            onSwipeComplete={() => toggleModal()}
+            swipeDirection="down"
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+            backdropTransitionOutTiming={0}
+          >
+            <View style={styles.modalContent}>
+              <TouchableOpacity onPress={toggleModal}>
+                <FontAwesome name="times-circle" style={styles.closeIcon} />
+              </TouchableOpacity>
+              {selectedParkingLot && (
+                <>
+                  <Ionicons
+                    name={getIconAndMessage(selectedParkingLot).icon}
+                    color={getIconAndMessage(selectedParkingLot).color}
+                    style={styles.alertIcon}
+                  />
+                  <View style={styles.modalHeader}>
+                    <Text style={styles.modalTextTitle1}>
+                      Estacionamiento{" "}
+                      <Text style={styles.modalTextTitle2}>
+                        {selectedParkingLot.name}
+                      </Text>
                     </Text>
+                  </View>
+                  <Text style={styles.modalText}>
+                    Capacidad de estacionamientos: {selectedParkingLot.capacity}
                   </Text>
-                </View>
-                <Text style={styles.modalText}>
-                  Capacidad de estacionamientos: {selectedParkingLot.capacity}
-                </Text>
-                <Text style={styles.modalText}>
-                  Estacionamientos ocupados: {selectedParkingLot.lotsUsed}
-                </Text>
-                <Text style={styles.modalText}>
-                  Estacionamientos desocupados:{" "}
-                  {selectedParkingLot.capacity - selectedParkingLot.lotsUsed}
-                </Text>
-                <Text style={styles.modalMessage}>
-                  {getIconAndMessage(selectedParkingLot).message}
-                </Text>
-              </>
-            )}
-          </View>
-        </Modal>
+                  <Text style={styles.modalText}>
+                    Estacionamientos ocupados: {selectedParkingLot.lotsUsed}
+                  </Text>
+                  <Text style={styles.modalText}>
+                    Estacionamientos desocupados:{" "}
+                    {selectedParkingLot.capacity - selectedParkingLot.lotsUsed}
+                  </Text>
+                  <Text style={styles.modalMessage}>
+                    {getIconAndMessage(selectedParkingLot).message}
+                  </Text>
+                </>
+              )}
+            </View>
+          </Modal>
+        </View>
       </View>
 
       {isLoggedIn ? (
