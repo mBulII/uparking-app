@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { verifyToken } from "../constants/api";
+import { refreshToken } from "../constants/api";
 import { userData } from "./userData";
 
 export const checkStatus = () => {
@@ -13,8 +14,16 @@ export const checkStatus = () => {
           await verifyToken(user.access);
           setIsLoggedIn(true);
         } catch (error) {
-          setIsLoggedIn(false);
-          console.error("Token verification failed:", error);
+          try {
+            await refreshToken(user.refresh);
+            setIsLoggedIn(true);
+          } catch (refreshError) {
+            setIsLoggedIn(false);
+            console.error(
+              "Token verification and refresh failed:",
+              refreshError
+            );
+          }
         }
       }
     };

@@ -43,7 +43,7 @@ export default function myAccountScreen() {
 
   const handleLogout = async () => {
     try {
-      await logoutUser();
+      await logoutUser(user.refresh);
       router.push("home");
     } catch (error) {
       console.error("Logout failed:", error);

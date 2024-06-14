@@ -39,10 +39,13 @@ export const passwordChange = async (formData) => {
   }
 };
 
-export const logoutUser = async () => {
+export const logoutUser = async (refreshToken) => {
   try {
-    await axios.post(`${URL}/logout/`);
+    const response = await axios.post(`${URL}/logout/`, {
+      refresh: refreshToken,
+    });
     await AsyncStorage.removeItem("userData");
+    return response.data;
   } catch (error) {
     throw error;
   }
