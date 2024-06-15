@@ -7,18 +7,25 @@ import {
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
+  ScrollView,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { checkStatus } from "../../hooks/checkStatus";
-import { userData } from "../../hooks/userData";
-import { logoutUser } from "../../constants/api";
+import { useStore } from "../../stateManagement/store";
+import { carFeatures, logoutUser } from "../../constants/api";
+import { Controller, useForm } from "react-hook-form";
+import {
+  plateValidation,
+  manufacturer,
+  color,
+} from "../../constants/validation";
 
 import { styles } from "../../styles/myAccount";
 import * as NavigationBar from "expo-navigation-bar";
 
 export default function myAccountScreen() {
   const isLoggedIn = checkStatus();
-  const user = userData();
+  const { user } = useStore();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
@@ -41,6 +48,26 @@ export default function myAccountScreen() {
     setIsFocused(true);
   };
 
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const onTouch = () => {
+    setFeedbackMessage("");
+  };
+
+  const handleCarFeaturesChanges = async (formData) => {
+    try {
+      await carFeatures(formData, user.access);
+      setFeedbackMessage("Datos actualizados exitosamente");
+    } catch (error) {
+      setFeedbackMessage("Los datos proporcionados no son válidos");
+    }
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const handleLogout = async () => {
     try {
       await logoutUser(user.refresh);
@@ -59,21 +86,96 @@ export default function myAccountScreen() {
         />
 
         {isLoggedIn ? (
-          <View style={styles.contentContainer}>
+          <ScrollView style={styles.contentContainer}>
             <View style={styles.titleContainer}>
               <Text style={styles.title1}>Bienvenido</Text>
               <Text style={styles.title2}> {user.user.p_nombre}</Text>
             </View>
-            <Text style={styles.subHeading}>Has enviado # comentarios</Text>
+            <View style={styles.subHeadingContainer}>
+              <Text style={styles.subHeading}>
+                Puedes ver todas tus patentes guardadas
+              </Text>
+              <TouchableOpacity>
+                <Text style={styles.subHeading2}> aquí</Text>
+              </TouchableOpacity>
+            </View>
 
-            <Text style={styles.labelText}>Patente de vehiculo</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Escribe tu patente"
-              placeholderTextColor="#CCCCCC"
-              onFocus={handleFocus}
+            <Text style={styles.labelText}>Patente de vehículo</Text>
+            <Controller
+              control={control}
+              name="patente"
+              rules={plateValidation}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Patente"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    onFocus={handleFocus}
+                    autoCapitalize="characters"
+                  />
+                  {errors.patente && (
+                    <Text style={styles.errorText}>
+                      {errors.patente.message}
+                    </Text>
+                  )}
+                </>
+              )}
             />
-            <TouchableOpacity style={styles.saveButton}>
+            <Text style={styles.labelText}>Fabricante</Text>
+            <Controller
+              control={control}
+              name="fabricante"
+              rules={manufacturer}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Fabricante"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    onFocus={handleFocus}
+                  />
+                  {errors.fabricante && (
+                    <Text style={styles.errorText}>
+                      {errors.fabricante.message}
+                    </Text>
+                  )}
+                </>
+              )}
+            />
+            <Text style={styles.labelText}>Color</Text>
+            <Controller
+              control={control}
+              name="color"
+              rules={color}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Color"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    onFocus={handleFocus}
+                  />
+                  {errors.color && (
+                    <Text style={styles.errorText}>{errors.color.message}</Text>
+                  )}
+                </>
+              )}
+            />
+
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={handleSubmit(handleCarFeaturesChanges)}
+            >
               <Text style={styles.saveButtonText}>Guardar</Text>
             </TouchableOpacity>
 
@@ -86,7 +188,16 @@ export default function myAccountScreen() {
             <TouchableOpacity style={styles.button2} onPress={handleLogout}>
               <Text style={styles.button2Text}>Cerrar sesión</Text>
             </TouchableOpacity>
-          </View>
+
+            {feedbackMessage ? (
+              <View style={styles.feedbackContainer}>
+                <Text style={styles.feedbackText}>{feedbackMessage}</Text>
+                <TouchableOpacity onPress={onTouch}>
+                  <Text style={styles.feedBackClose}>Cerrar</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+          </ScrollView>
         ) : null}
       </View>
     </TouchableWithoutFeedback>

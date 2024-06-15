@@ -34,11 +34,19 @@ export const styles = StyleSheet.create({
     color: colors.accent,
     fontSize: hp(3),
   },
+
+  subHeadingContainer: {
+    flexDirection: "row",
+    marginLeft: wp(3),
+    marginBottom: hp(4),
+  },
   subHeading: {
     fontSize: hp(2),
     color: colors.text,
-    marginBottom: hp(15),
-    marginLeft: wp(3),
+  },
+  subHeading2: {
+    fontSize: hp(2),
+    color: colors.accent,
   },
 
   labelText: {
@@ -46,15 +54,23 @@ export const styles = StyleSheet.create({
     fontSize: hp(2),
     marginLeft: wp(5),
     marginBottom: hp(1),
+    marginTop: hp(2),
   },
   input: {
     borderWidth: 1,
     padding: 6.21,
+    paddingLeft: wp(5),
     color: colors.text,
     borderColor: colors.grey,
     borderRadius: 20,
     width: wp(93),
     alignSelf: "center",
+    marginBottom: hp(1),
+  },
+  errorText: {
+    fontSize: hp(1.5),
+    color: colors.red,
+    marginLeft: wp(8),
   },
   saveButton: {
     width: wp(50),
@@ -65,7 +81,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 12,
     paddingHorizontal: 10,
-    marginTop: hp(5),
+    marginTop: hp(3),
   },
   saveButtonText: {
     fontSize: hp(2),
@@ -82,7 +98,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: colors.main,
-    marginTop: hp(23),
+    marginTop: hp(10),
   },
   button1Text: {
     fontSize: hp(2),
@@ -101,5 +117,30 @@ export const styles = StyleSheet.create({
   button2Text: {
     fontSize: hp(2),
     color: colors.bg,
+  },
+
+  feedbackContainer: {
+    position: "absolute",
+    top: hp(30),
+    left: wp(15),
+    backgroundColor: colors.main,
+    borderRadius: 20,
+    height: hp(30),
+    width: wp(70),
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+  feedbackText: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.bg,
+    textAlign: "center",
+    paddingBottom: 30,
+  },
+  feedBackClose: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.red,
+    textAlign: "center",
   },
 });

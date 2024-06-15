@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loginUser } from "../../constants/api";
 import { email, loginPassword } from "../../constants/validation";
+import { useStore } from "../../stateManagement/store";
 
 import { styles } from "../../styles/login";
 import * as NavigationBar from "expo-navigation-bar";
@@ -19,6 +19,7 @@ import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 export default function loginScreen() {
   const router = useRouter();
+  const { setUser } = useStore();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {
@@ -40,7 +41,7 @@ export default function loginScreen() {
     try {
       const response = await loginUser(formData);
       const userData = response;
-      AsyncStorage.setItem("userData", JSON.stringify(userData));
+      setUser(userData);
       router.push("home");
     } catch (error) {
       setFeedbackMessage("Los datos proporcionados no son válidos");

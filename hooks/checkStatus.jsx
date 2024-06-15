@@ -1,34 +1,43 @@
-import { useState, useEffect } from "react";
-import { verifyToken } from "../constants/api";
-import { refreshToken } from "../constants/api";
-import { userData } from "./userData";
+import { useEffect, useCallback } from "react";
+import { verifyToken, refreshToken } from "../constants/api";
+import { useStore } from "../stateManagement/store";
 
 export const checkStatus = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const user = userData();
+  const { user, setUser, isLoggedIn, setIsLoggedIn } = useStore();
 
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      if (user) {
-        try {
-          await verifyToken(user.access);
+  const checkLoginStatus = useCallback(async () => {
+    if (user) {
+      try {
+        await verifyToken(user.access);
+        if (!isLoggedIn) {
           setIsLoggedIn(true);
-        } catch (error) {
-          try {
-            await refreshToken(user.refresh);
+        }
+      } catch (error) {
+        try {
+          const newTokens = await refreshToken(user.refresh);
+          const updatedUser = {
+            ...user,
+            access: newTokens.access,
+          };
+          setUser(updatedUser);
+          if (!isLoggedIn) {
             setIsLoggedIn(true);
-          } catch (refreshError) {
-            setIsLoggedIn(false);
-            console.error(
-              "Token verification and refresh failed:",
-              refreshError
-            );
           }
+        } catch (refreshError) {
+          setIsLoggedIn(false);
+          console.error("Token verification and refresh failed:", refreshError);
         }
       }
-    };
-    checkLoginStatus();
-  }, [user]);
+    }
+  }, [user, isLoggedIn, setIsLoggedIn, setUser]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      checkLoginStatus();
+      console.log("one minute, running check status");
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [checkLoginStatus]);
 
   return isLoggedIn;
 };

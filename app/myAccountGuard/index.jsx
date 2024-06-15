@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { checkStatus } from "../../hooks/checkStatus";
-import { userData } from "../../hooks/userData";
+import { useStore } from "../../stateManagement/store";
 import { logoutUser } from "../../constants/api";
 
 import { styles } from "../../styles/myAccountGuard";
@@ -11,7 +11,7 @@ import { FontAwesome6 } from "@expo/vector-icons";
 
 export default function myAccountGuardScreen() {
   const isLoggedIn = checkStatus();
-  const user = userData();
+  const user = useStore();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {

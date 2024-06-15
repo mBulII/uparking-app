@@ -1,15 +1,23 @@
-import { useState, useEffect } from "react";
-import { userData } from "./userData";
+import { useEffect, useCallback } from "react";
+import { useStore } from "../stateManagement/store";
 
 export const checkRole = () => {
-  const [isGuard, setIsGuard] = useState(null);
-  const user = userData();
+  const { user, isGuard, setIsGuard } = useStore();
 
-  useEffect(() => {
+  const updateRole = useCallback(async () => {
     if (user && user.user.rol === "vigilante") {
-      setIsGuard(true);
+      if (!isGuard) {
+        setIsGuard(true);
+      }
+    } else {
+      if (isGuard !== false) {
+        setIsGuard(false);
+      }
     }
-  }, [user]);
+  }, [user, isGuard, setIsGuard]);
+  useEffect(() => {
+    updateRole();
+  }, []);
 
   return isGuard;
 };

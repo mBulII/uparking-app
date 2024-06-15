@@ -70,3 +70,17 @@ export const confirmNewPassword = {
 export const loginPassword = {
   required: "Este campo es obligatorio",
 };
+
+export const plateValidation = {
+  required: "Este campo es obligatorio",
+  pattern: {
+    value: /^[A-Za-z][A-Za-z0-9]{5}$/,
+    message: "La patente no es válida",
+  },
+};
+export const manufacturer = {
+  required: "Este campo es obligatorio",
+};
+export const color = {
+  required: "Este campo es obligatorio",
+};

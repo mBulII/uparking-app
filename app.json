@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.uparkingapp"
     },
     "web": {
       "bundler": "metro",
