@@ -36,9 +36,6 @@ export default function forgotPasswordScreen() {
     setIsFocused(false);
     Keyboard.dismiss();
   };
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
 
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {
@@ -98,7 +95,6 @@ export default function forgotPasswordScreen() {
                       onChange(value.toLowerCase().trim())
                     }
                     autoCapitalize="none"
-                    onFocus={handleFocus}
                   />
                   {errors.email && (
                     <Text style={styles.errorText}>{errors.email.message}</Text>

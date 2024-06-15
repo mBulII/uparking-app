@@ -19,8 +19,8 @@ import {
 } from "@expo/vector-icons";
 
 export default function addReportScreen() {
-  const { isLoggedIn } = useStore();
   const router = useRouter();
+  const { isLoggedIn } = useStore();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {

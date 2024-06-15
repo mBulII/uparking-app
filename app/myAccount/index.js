@@ -23,8 +23,8 @@ import { styles } from "../../styles/myAccount";
 import * as NavigationBar from "expo-navigation-bar";
 
 export default function myAccountScreen() {
-  const { user, isLoggedIn, logout } = useStore();
   const router = useRouter();
+  const { user, isLoggedIn, logout } = useStore();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {
@@ -56,7 +56,7 @@ export default function myAccountScreen() {
       await carFeatures(formData, user.access);
       setFeedbackMessage("Datos actualizados exitosamente");
     } catch (error) {
-      setFeedbackMessage("Los datos proporcionados no son válidos");
+      setFeedbackMessage("No fue posible guardar los datos");
     }
   };
 
@@ -93,7 +93,7 @@ export default function myAccountScreen() {
               <Text style={styles.subHeading}>
                 Puedes ver todas tus patentes guardadas
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push("userCars")}>
                 <Text style={styles.subHeading2}> aquí</Text>
               </TouchableOpacity>
             </View>

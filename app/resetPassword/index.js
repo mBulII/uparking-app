@@ -36,9 +36,6 @@ export default function resetPasswordScreen() {
     setIsFocused(false);
     Keyboard.dismiss();
   };
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
 
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {

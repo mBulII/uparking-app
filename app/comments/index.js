@@ -33,9 +33,6 @@ export default function commentsScreen() {
     setIsFocused(false);
     Keyboard.dismiss();
   };
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
 
   return (
     <TouchableWithoutFeedback onPress={handleOutside}>
@@ -58,7 +55,6 @@ export default function commentsScreen() {
             style={styles.input}
             placeholder="Escribe tu comentario..."
             placeholderTextColor="#CCCCCC"
-            onFocus={handleFocus}
           />
 
           <TouchableOpacity style={styles.imageButton}>

@@ -8,8 +8,8 @@ import * as NavigationBar from "expo-navigation-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function notificationScreen() {
-  const { isLoggedIn } = useStore();
   const router = useRouter();
+  const { isLoggedIn } = useStore();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {

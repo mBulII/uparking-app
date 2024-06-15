@@ -48,7 +48,7 @@ export default function signUpScreen() {
 
   const handleAccountCreation = async (formData) => {
     try {
-      const response = await registerUser(formData);
+      await registerUser(formData);
       setFeedbackMessage(
         "Tu cuenta se ha creado de forma exitosa, puedes iniciar sesión"
       );

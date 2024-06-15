@@ -9,8 +9,8 @@ import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome6 } from "@expo/vector-icons";
 
 export default function myAccountGuardScreen() {
-  const { user, isLoggedIn, logout } = useStore();
   const router = useRouter();
+  const { user, isLoggedIn, logout } = useStore();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {

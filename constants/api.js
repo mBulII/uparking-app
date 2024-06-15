@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useStore } from "../stateManagement/store";
 
 import { authURL, apiURL } from "./URL";
 
@@ -82,6 +81,31 @@ export const carFeatures = async (formData, accessToken) => {
       },
     });
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const fetchCarFeatures = async (accessToken) => {
+  try {
+    const response = await axios.get(`${apiURL}/patentes/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const deleteCarData = async (carId, accessToken) => {
+  try {
+    await axios.delete(`${apiURL}/patentes/${carId}/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     throw error;
   }
