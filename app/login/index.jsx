@@ -12,6 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { loginUser } from "../../constants/api";
 import { email, loginPassword } from "../../constants/validation";
 import { useStore } from "../../stateManagement/store";
+import { tokenRefresh } from "../../hooks/tokenRefresh";
 
 import { styles } from "../../styles/login";
 import * as NavigationBar from "expo-navigation-bar";
@@ -20,6 +21,7 @@ import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 export default function loginScreen() {
   const router = useRouter();
   const { setUser } = useStore();
+  tokenRefresh();
   useEffect(() => {
     const setNavigationBarColor = async () => {
       try {

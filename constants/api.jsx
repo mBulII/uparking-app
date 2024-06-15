@@ -39,8 +39,7 @@ export const passwordChange = async (formData) => {
   }
 };
 
-export const logoutUser = async (refreshToken) => {
-  const { logout } = useStore();
+export const logoutUser = async (logout, refreshToken) => {
   try {
     const response = await axios.post(`${authURL}/logout/`, {
       refresh: refreshToken,

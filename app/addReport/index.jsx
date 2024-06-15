@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { checkStatus } from "../../hooks/checkStatus";
+import { useStore } from "../../stateManagement/store";
 
 import { styles } from "../../styles/addReport";
 import * as NavigationBar from "expo-navigation-bar";
@@ -19,7 +19,7 @@ import {
 } from "@expo/vector-icons";
 
 export default function addReportScreen() {
-  const isLoggedIn = checkStatus();
+  const { isLoggedIn } = useStore();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {

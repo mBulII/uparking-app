@@ -2,10 +2,17 @@ import { useEffect, useCallback } from "react";
 import { verifyToken, refreshToken } from "../constants/api";
 import { useStore } from "../stateManagement/store";
 
-export const checkStatus = () => {
-  const { user, setUser, isLoggedIn, setIsLoggedIn } = useStore();
+export const tokenRefresh = () => {
+  const {
+    user,
+    setUser,
+    isLoggedIn,
+    setIsLoggedIn,
+    setIntervalId,
+    clearInterval,
+  } = useStore();
 
-  const checkLoginStatus = useCallback(async () => {
+  const refreshTokenInterval = useCallback(async () => {
     if (user) {
       try {
         await verifyToken(user.access);
@@ -32,12 +39,15 @@ export const checkStatus = () => {
   }, [user, isLoggedIn, setIsLoggedIn, setUser]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      checkLoginStatus();
-      console.log("one minute, running check status");
-    }, 60000);
-    return () => clearInterval(interval);
-  }, [checkLoginStatus]);
+    if (isLoggedIn) {
+      const interval = setInterval(() => {
+        refreshTokenInterval();
+      }, 60000);
+      setIntervalId(interval);
 
-  return isLoggedIn;
+      return () => {
+        clearInterval();
+      };
+    }
+  }, [isLoggedIn, refreshTokenInterval, setIntervalId, clearInterval]);
 };

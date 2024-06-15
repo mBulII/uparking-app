@@ -4,9 +4,17 @@ import { setItem, getItem, removeItem } from "./storage";
 export const useStore = create((set) => ({
   user: null,
   isLoggedIn: false,
-  isGuard: null,
+  isGuard: false,
+  intervalId: null,
+
   setUser: (user) => {
-    set({ user, isLoggedIn: !!user });
+    const isLoggedIn = !!user;
+    const isGuard = user?.user?.rol === "vigilante";
+    set({
+      user,
+      isLoggedIn,
+      isGuard,
+    });
     setItem("user", JSON.stringify(user));
   },
   setIsLoggedIn: (status) => {
@@ -15,14 +23,32 @@ export const useStore = create((set) => ({
   setIsGuard: (status) => {
     set({ isGuard: status });
   },
-  loadUser: () => {
-    const userData = getItem("user");
-    if (userData) {
-      set({ user: JSON.parse(userData), isLoggedIn: true });
-    }
+  setIntervalId: (id) => {
+    set({ intervalId: id });
   },
+
+  clearInterval: () => {
+    set((state) => {
+      if (state.intervalId) {
+        clearInterval(state.intervalId);
+        return { intervalId: null };
+      }
+      return {};
+    });
+  },
+
   logout: () => {
-    set({ user: null, isLoggedIn: false, isGuard: null });
+    set((state) => {
+      if (state.intervalId) {
+        clearInterval(state.intervalId);
+      }
+      return {
+        user: null,
+        isLoggedIn: false,
+        isGuard: false,
+        intervalId: null,
+      };
+    });
     removeItem("user");
   },
 }));

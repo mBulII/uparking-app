@@ -10,7 +10,6 @@ import {
   ScrollView,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { checkStatus } from "../../hooks/checkStatus";
 import { useStore } from "../../stateManagement/store";
 import { carFeatures, logoutUser } from "../../constants/api";
 import { Controller, useForm } from "react-hook-form";
@@ -24,8 +23,7 @@ import { styles } from "../../styles/myAccount";
 import * as NavigationBar from "expo-navigation-bar";
 
 export default function myAccountScreen() {
-  const isLoggedIn = checkStatus();
-  const { user } = useStore();
+  const { user, isLoggedIn, logout } = useStore();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
@@ -70,7 +68,7 @@ export default function myAccountScreen() {
 
   const handleLogout = async () => {
     try {
-      await logoutUser(user.refresh);
+      await logoutUser(logout, user.refresh);
       router.push("home");
     } catch (error) {
       console.error("Logout failed:", error);

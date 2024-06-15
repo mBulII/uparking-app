@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import Modal from "react-native-modal";
-import { checkStatus } from "../../hooks/checkStatus";
-import { checkRole } from "../../hooks/checkRole";
+import { useStore } from "../../stateManagement/store";
 
 import { styles } from "../../styles/home";
 import * as NavigationBar from "expo-navigation-bar";
@@ -16,8 +15,7 @@ import {
 } from "@expo/vector-icons";
 
 export default function homeScreen() {
-  const isLoggedIn = checkStatus();
-  const isGuard = checkRole();
+  const { isLoggedIn, isGuard } = useStore();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {

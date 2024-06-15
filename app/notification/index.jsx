@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
-import { checkStatus } from "../../hooks/checkStatus";
+import { useStore } from "../../stateManagement/store";
 
 import { styles } from "../../styles/notification";
 import * as NavigationBar from "expo-navigation-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function notificationScreen() {
-  const isLoggedIn = checkStatus();
+  const { isLoggedIn } = useStore();
   const router = useRouter();
   useEffect(() => {
     const setNavigationBarColor = async () => {
