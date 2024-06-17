@@ -84,3 +84,10 @@ export const manufacturer = {
 export const color = {
   required: "Este campo es obligatorio",
 };
+
+export const reportLicensePlate = {
+  required: "Este campo es obligatorio",
+};
+export const reportEstacionamiento = {
+  required: "Debes seleccionar un estacionamiento",
+};

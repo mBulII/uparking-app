@@ -98,6 +98,19 @@ export const fetchCarFeatures = async (accessToken) => {
     throw error;
   }
 };
+export const fetchCarFeaturesVigilante = async (accessToken) => {
+  try {
+    const response = await axios.get(`${apiURL}/vigilante/patentes/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const deleteCarData = async (carId, accessToken) => {
   try {
     await axios.delete(`${apiURL}/patentes/${carId}/`, {
@@ -106,6 +119,38 @@ export const deleteCarData = async (carId, accessToken) => {
         "Content-Type": "application/json",
       },
     });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchParkingLots = async (accessToken) => {
+  try {
+    const response = await axios.get(`${apiURL}/estacionamientos/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const sendNotification = async (formData, accessToken) => {
+  try {
+    const response = await axios.post(
+      `${apiURL}/vigilante/notificaciones/`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
   } catch (error) {
     throw error;
   }

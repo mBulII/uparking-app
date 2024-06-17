@@ -111,7 +111,7 @@ export default function myAccountScreen() {
                     placeholderTextColor="#CCCCCC"
                     value={value}
                     onBlur={onBlur}
-                    onChangeText={onChange}
+                    onChangeText={(value) => onChange(value.trim())}
                     onFocus={handleFocus}
                     autoCapitalize="characters"
                   />

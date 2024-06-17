@@ -38,12 +38,46 @@ export const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     height: hp(5),
-    paddingLeft: wp(2),
+    paddingLeft: wp(3),
     color: colors.text,
     borderColor: colors.grey,
-    borderRadius: 20,
+    borderRadius: hp(3),
     width: wp(93),
     alignSelf: "center",
+    fontSize: hp(1.7),
+  },
+  errorText: {
+    fontSize: hp(1.5),
+    color: colors.red,
+    marginLeft: wp(6),
+  },
+  dropdown: {
+    height: hp(5),
+    width: wp(93),
+    borderColor: colors.grey,
+    borderWidth: 1,
+    borderRadius: hp(3),
+    paddingLeft: wp(3),
+    alignSelf: "center",
+  },
+  dropdownContainer: {
+    width: wp(93),
+    borderColor: colors.grey,
+    borderWidth: 1,
+    borderRadius: 20,
+    paddingLeft: wp(3),
+  },
+  dropdownPlaceholder: {
+    fontSize: hp(1.7),
+    color: colors.grey,
+  },
+  selectedTextStyle: {
+    fontSize: hp(1.7),
+    color: colors.text,
+  },
+  dropdownItemText: {
+    fontSize: hp(1.7),
+    color: colors.text,
   },
 
   buttonsContainer: {
@@ -63,6 +97,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: hp(4),
   },
+  selectedButton: {
+    width: wp(25),
+    height: hp(12),
+    borderWidth: 1,
+    borderColor: colors.main,
+    borderRadius: wp(5),
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: hp(4),
+  },
   buttonIcon: {
     fontSize: hp(4),
     color: colors.main,
@@ -72,6 +116,18 @@ export const styles = StyleSheet.create({
     fontSize: hp(1.5),
     color: colors.text,
     textAlign: "center",
+  },
+
+  bigInput: {
+    width: wp(93),
+    height: hp(15),
+    borderColor: colors.grey,
+    borderWidth: 1,
+    padding: 10,
+    alignSelf: "center",
+    textAlignVertical: "top",
+    marginTop: hp(2),
+    borderRadius: 22,
   },
 
   imageButton: {
@@ -157,5 +213,30 @@ export const styles = StyleSheet.create({
   button2Text: {
     fontSize: hp(3),
     color: colors.bg,
+  },
+
+  feedbackContainer: {
+    position: "absolute",
+    top: hp(30),
+    left: wp(15),
+    backgroundColor: colors.main,
+    borderRadius: 20,
+    height: hp(30),
+    width: wp(70),
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+  feedbackText: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.bg,
+    textAlign: "center",
+    paddingBottom: 30,
+  },
+  feedBackClose: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.red,
+    textAlign: "center",
   },
 });
