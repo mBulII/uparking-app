@@ -53,8 +53,9 @@ export default function commentsScreen() {
 
           <TextInput
             style={styles.input}
-            placeholder="Escribe tu comentario..."
+            placeholder="Escribe tu comentario"
             placeholderTextColor="#CCCCCC"
+            multiline={true}
           />
 
           <TouchableOpacity style={styles.imageButton}>

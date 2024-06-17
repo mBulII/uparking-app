@@ -119,8 +119,8 @@ export const styles = StyleSheet.create({
   },
 
   bigInput: {
-    width: wp(93),
-    height: hp(15),
+    width: wp(85),
+    height: hp(13),
     borderColor: colors.grey,
     borderWidth: 1,
     padding: 10,
@@ -128,6 +128,7 @@ export const styles = StyleSheet.create({
     textAlignVertical: "top",
     marginTop: hp(2),
     borderRadius: 22,
+    fontSize: hp(2),
   },
 
   imageButton: {

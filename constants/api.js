@@ -155,3 +155,16 @@ export const sendNotification = async (formData, accessToken) => {
     throw error;
   }
 };
+export const fetchNotificationVigilante = async (accessToken) => {
+  try {
+    const response = await axios.get(`${apiURL}/vigilante/notificaciones/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

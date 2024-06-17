@@ -52,6 +52,9 @@ export default function addReportScreen() {
           parkingLotsData.map((pl) => ({ label: pl.nombre, value: pl.id }))
         );
       } catch (error) {
+        setFeedbackMessage(
+          "No se pudo obtener los estacionamientos, cerrar sesión y volver a iniciar"
+        );
         console.error("Couldn't fetch the parking lots:", error);
       }
     };
@@ -178,7 +181,9 @@ export default function addReportScreen() {
       await sendNotification(formData, user.access);
       setFeedbackMessage("El reporte sa ha enviado con exito");
     } catch (error) {
-      setFeedbackMessage("No se pudo enviar el reporte");
+      setFeedbackMessage(
+        "No se pudo enviar el reporte, intentelo denuevo o vuelva a iniciar sesión"
+      );
       console.error("Error sending the notification:", error);
     }
   };
@@ -265,6 +270,9 @@ export default function addReportScreen() {
                     placeholderTextColor="#CCCCCC"
                     value={value}
                     onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    multiline={true}
+                    maxLength={170}
                   />
                   {errors.comment && (
                     <Text style={styles.errorText}>
