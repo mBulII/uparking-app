@@ -85,6 +85,7 @@ export const carFeatures = async (formData, accessToken) => {
     throw error;
   }
 };
+
 export const fetchCarFeatures = async (accessToken) => {
   try {
     const response = await axios.get(`${apiURL}/patentes/`, {
@@ -98,6 +99,7 @@ export const fetchCarFeatures = async (accessToken) => {
     throw error;
   }
 };
+
 export const fetchCarFeaturesVigilante = async (accessToken) => {
   try {
     const response = await axios.get(`${apiURL}/vigilante/patentes/`, {
@@ -111,6 +113,7 @@ export const fetchCarFeaturesVigilante = async (accessToken) => {
     throw error;
   }
 };
+
 export const deleteCarData = async (carId, accessToken) => {
   try {
     await axios.delete(`${apiURL}/patentes/${carId}/`, {
@@ -155,6 +158,7 @@ export const sendNotification = async (formData, accessToken) => {
     throw error;
   }
 };
+
 export const fetchNotificationVigilante = async (accessToken) => {
   try {
     const response = await axios.get(`${apiURL}/vigilante/notificaciones/`, {
@@ -164,6 +168,40 @@ export const fetchNotificationVigilante = async (accessToken) => {
       },
     });
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const decreaseParkingLotCapacity = async (parkingLotId, accessToken) => {
+  try {
+    await axios.put(
+      `${apiURL}/vigilante/decrease-capacidad/${parkingLotId}/`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const increaseParkingLotCapacity = async (parkingLotId, accessToken) => {
+  try {
+    await axios.put(
+      `${apiURL}/vigilante/increase-capacidad/${parkingLotId}/`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   } catch (error) {
     throw error;
   }

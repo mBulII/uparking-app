@@ -15,25 +15,12 @@ import { useStore } from "../../stateManagement/store";
 import { tokenRefresh } from "../../hooks/tokenRefresh";
 
 import { styles } from "../../styles/login";
-import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 export default function loginScreen() {
   const router = useRouter();
   const { setUser } = useStore();
   tokenRefresh();
-  useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-  }, []);
-
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {
     setFeedbackMessage("");

@@ -22,23 +22,10 @@ import {
 } from "../../constants/validation";
 
 import { styles } from "../../styles/signUp";
-import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 export default function signUpScreen() {
   const router = useRouter();
-  useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-  }, []);
-
   const [feedbackMessage, setFeedbackMessage] = React.useState("");
   const [accountCreated, setAccountCreated] = useState(false);
   const onTouch = () => {

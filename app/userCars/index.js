@@ -5,23 +5,12 @@ import { useStore } from "../../stateManagement/store";
 import { fetchCarFeatures, deleteCarData } from "../../constants/api";
 
 import { styles } from "../../styles/userCars";
-import * as NavigationBar from "expo-navigation-bar";
 
 export default function userCarsScreen() {
   const router = useRouter();
   const { isLoggedIn, user } = useStore();
   const [cars, setCars] = useState([]);
   useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-
     const fetchCars = async () => {
       try {
         const carsData = await fetchCarFeatures(user.access);

@@ -5,24 +5,11 @@ import { useStore } from "../../stateManagement/store";
 import { logoutUser } from "../../constants/api";
 
 import { styles } from "../../styles/myAccountGuard";
-import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome6 } from "@expo/vector-icons";
 
 export default function myAccountGuardScreen() {
   const router = useRouter();
   const { user, isLoggedIn, logout } = useStore();
-  useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-  }, []);
-
   const handleLogout = async () => {
     try {
       await logoutUser(logout, user.refresh);

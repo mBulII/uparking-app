@@ -20,23 +20,10 @@ import {
 } from "../../constants/validation";
 
 import { styles } from "../../styles/myAccount";
-import * as NavigationBar from "expo-navigation-bar";
 
 export default function myAccountScreen() {
   const router = useRouter();
   const { user, isLoggedIn, logout } = useStore();
-  useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-  }, []);
-
   const [isFocused, setIsFocused] = useState(false);
   const handleOutside = () => {
     setIsFocused(false);

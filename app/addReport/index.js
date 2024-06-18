@@ -22,7 +22,6 @@ import {
 } from "../../constants/validation";
 
 import { styles } from "../../styles/addReport";
-import * as NavigationBar from "expo-navigation-bar";
 import {
   FontAwesome,
   MaterialCommunityIcons,
@@ -35,16 +34,6 @@ export default function addReportScreen() {
   const [parkingLots, setParkingLots] = useState([]);
   const [cars, setCars] = useState([]);
   useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-
     const fetchLots = async () => {
       try {
         const parkingLotsData = await fetchParkingLots(user.access);

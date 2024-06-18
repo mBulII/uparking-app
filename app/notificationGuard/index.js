@@ -4,23 +4,11 @@ import { useRouter } from "expo-router";
 import { useStore } from "../../stateManagement/store";
 
 import { styles } from "../../styles/notificationGuard";
-import * as NavigationBar from "expo-navigation-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function notificationGuardScreen() {
   const router = useRouter();
   const { isLoggedIn } = useStore();
-  useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-  }, []);
 
   return (
     <View style={styles.container}>

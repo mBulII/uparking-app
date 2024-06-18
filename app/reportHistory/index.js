@@ -9,7 +9,6 @@ import {
 } from "../../constants/api";
 
 import { styles } from "../../styles/reportHistory";
-import * as NavigationBar from "expo-navigation-bar";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 
 export default function reportHistoryScreen() {
@@ -19,16 +18,6 @@ export default function reportHistoryScreen() {
   const [cars, setCars] = useState([]);
   const [parkingLots, setParkingLots] = useState([]);
   useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-
     const fetchAllNotifications = async () => {
       try {
         const notificationsData = await fetchNotificationVigilante(user.access);

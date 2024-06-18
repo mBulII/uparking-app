@@ -14,23 +14,10 @@ import { passwordReset } from "../../constants/api";
 import { email } from "../../constants/validation";
 
 import { styles } from "../../styles/forgotPassword";
-import * as NavigationBar from "expo-navigation-bar";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function forgotPasswordScreen() {
   const router = useRouter();
-  useEffect(() => {
-    const setNavigationBarColor = async () => {
-      try {
-        await NavigationBar.setBackgroundColorAsync("#000000");
-        await NavigationBar.setButtonStyleAsync("light");
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    setNavigationBarColor();
-  }, []);
-
   const [isFocused, setIsFocused] = useState(false);
   const handleOutside = () => {
     setIsFocused(false);
