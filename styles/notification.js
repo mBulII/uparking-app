@@ -30,11 +30,11 @@ export const styles = StyleSheet.create({
 
   notificationBox: {
     width: wp(90),
-    height: hp(19.3),
+    height: hp(22),
     padding: 10,
     borderWidth: 1,
     borderColor: colors.accent,
-    borderRadius: 20,
+    borderRadius: hp(4),
     justifyContent: "space-between",
     alignSelf: "center",
     marginTop: hp(2),
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
   button: {
     width: wp(80),
     height: hp(6),
-    borderRadius: 20,
+    borderRadius: hp(4),
     backgroundColor: colors.main,
     justifyContent: "center",
     alignItems: "center",
@@ -76,5 +76,22 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: hp(3),
     color: colors.bg,
+  },
+
+  noNotificationBox: {
+    width: wp(90),
+    height: hp(22),
+    padding: 10,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    borderRadius: hp(4),
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: hp(2),
+  },
+  noNotificationIcon: {
+    fontSize: hp(8),
+    color: colors.main,
+    alignSelf: "center",
   },
 });

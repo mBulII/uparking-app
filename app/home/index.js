@@ -23,6 +23,7 @@ export default function homeScreen() {
   const [parkingLot, setParkingLot] = useState([]);
   const [selectedParkingLot, setSelectedParkingLot] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchParkingLotData = async () => {
       try {
@@ -32,7 +33,9 @@ export default function homeScreen() {
         console.error("Couldn't fetch the parking lots data", error);
       }
     };
-    fetchParkingLotData();
+    if (isGuard) {
+      fetchParkingLotData();
+    }
   }, []);
 
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -59,11 +62,13 @@ export default function homeScreen() {
   };
 
   const decreaseCapacity = async () => {
+    if (loading) return;
     setButtonSelected("decrease");
     if (selectedParkingLot.capacidad <= 0) {
       setFeedbackMessage("No puede seguir reduciendo la capacidad");
       return;
     }
+    setLoading(true);
     try {
       await decreaseParkingLotCapacity(selectedParkingLot.id, user.access);
       const newCapacity = selectedParkingLot.capacidad - 1;
@@ -74,14 +79,18 @@ export default function homeScreen() {
       updateParkingLotCapacity(selectedParkingLot.id, newCapacity);
     } catch (error) {
       console.error("Couldn't decrease the parking lot capacity", error);
+    } finally {
+      setLoading(false);
     }
   };
   const increaseCapacity = async () => {
+    if (loading) return;
     setButtonSelected("increase");
     if (selectedParkingLot.capacidad >= selectedParkingLot.capacidad_max) {
       setFeedbackMessage("No puede seguir aumentando la capacidad");
       return;
     }
+    setLoading(true);
     try {
       await increaseParkingLotCapacity(selectedParkingLot.id, user.access);
       const newCapacity = selectedParkingLot.capacidad + 1;
@@ -92,6 +101,8 @@ export default function homeScreen() {
       updateParkingLotCapacity(selectedParkingLot.id, newCapacity);
     } catch (error) {
       console.error("Couldn't increase the parking lot capacity", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -155,7 +166,7 @@ export default function homeScreen() {
 
             <Text style={styles.modalModifyTitle}>Modificar</Text>
             <View style={styles.modalModifyIconsContainer}>
-              <TouchableOpacity onPress={decreaseCapacity}>
+              <TouchableOpacity onPress={decreaseCapacity} disabled={loading}>
                 <FontAwesome
                   name="minus-square"
                   style={
@@ -168,7 +179,7 @@ export default function homeScreen() {
               <View style={styles.modalModifyNumber}>
                 <Text style={styleText}>{selectedParkingLot.capacidad}</Text>
               </View>
-              <TouchableOpacity onPress={increaseCapacity}>
+              <TouchableOpacity onPress={increaseCapacity} disabled={loading}>
                 <FontAwesome
                   name="plus-square"
                   style={

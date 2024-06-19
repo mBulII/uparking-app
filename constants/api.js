@@ -40,7 +40,7 @@ export const passwordChange = async (formData) => {
 
 export const logoutUser = async (logout, refreshToken) => {
   try {
-    const response = await axios.post(`${authURL}/logout/`, {
+    const response = await axios.post(`${authURL}/blacklist/`, {
       refresh: refreshToken,
     });
     logout();
@@ -162,6 +162,20 @@ export const sendNotification = async (formData, accessToken) => {
 export const fetchNotificationVigilante = async (accessToken) => {
   try {
     const response = await axios.get(`${apiURL}/vigilante/notificaciones/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchNotificationUser = async (accessToken) => {
+  try {
+    const response = await axios.get(`${apiURL}/notificaciones/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
