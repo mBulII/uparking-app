@@ -25,6 +25,73 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.bg,
   },
 
+  requestModalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.transparent,
+  },
+  requestModalContainer: {
+    backgroundColor: colors.bg,
+    padding: hp(2),
+    height: hp(50),
+    width: wp(80),
+    borderRadius: hp(4),
+    alignItems: "center",
+  },
+  requestModalIcon: {
+    fontSize: hp(10),
+    color: colors.main,
+    marginTop: hp(3),
+    marginBottom: hp(5),
+  },
+  requestModalTitle: {
+    fontSize: hp(3),
+    color: colors.text,
+    marginBottom: hp(1),
+  },
+  requestModalTitle2: {
+    fontSize: hp(2),
+    color: colors.text,
+    marginBottom: hp(10),
+    textAlign: "center",
+  },
+  requestModalButtonContainer: {
+    flexDirection: "row",
+  },
+  requestModalButton: {
+    width: wp(30),
+    height: hp(4),
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.main,
+    borderRadius: hp(3),
+    marginRight: wp(5),
+  },
+  requestModalButtonText: {
+    fontSize: hp(2),
+    color: colors.bg,
+  },
+  requestModalButton2: {
+    width: wp(30),
+    height: hp(4),
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.bg,
+    borderRadius: hp(3),
+    borderWidth: 1,
+    borderColor: colors.main,
+    marginLeft: wp(5),
+  },
+  requestModalButtonText2: {
+    fontSize: hp(2),
+    color: colors.main,
+  },
+
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
   modalTest: {
     width: wp(30),
     height: hp(5),

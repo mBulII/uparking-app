@@ -7,13 +7,18 @@ import {
   increaseParkingLotCapacity,
   decreaseParkingLotCapacity,
 } from "../../constants/api";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import * as Location from "expo-location";
+import { usePermission } from "../../hooks/locationPermission";
 
 import { styles } from "../../styles/home";
+import { hp } from "../../constants/device";
 import {
   FontAwesome,
   FontAwesome6,
   MaterialIcons,
   MaterialCommunityIcons,
+  Entypo,
 } from "@expo/vector-icons";
 
 export default function homeScreen() {
@@ -36,6 +41,7 @@ export default function homeScreen() {
     if (isGuard) {
       fetchParkingLotData();
     }
+    checkPermission();
   }, []);
 
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -212,6 +218,28 @@ export default function homeScreen() {
     );
   };
 
+  const { permissionGranted, setPermissionGranted, modalShown, setModalShown } =
+    usePermission();
+  const checkPermission = async () => {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    setPermissionGranted(status === "granted");
+    if (status !== "granted" && !modalShown) {
+      setModalShown(true);
+    }
+  };
+  const requestPermission = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    setPermissionGranted(status === "granted");
+    setModalShown(false);
+  };
+
+  const mapLocation = {
+    latitude: -40.597439564923796,
+    longitude: -73.10427194867697,
+    latitudeDelta: 0,
+    longitudeDelta: 0,
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
@@ -220,6 +248,37 @@ export default function homeScreen() {
           style={styles.headerLogo}
         />
       </View>
+      {modalShown && (
+        <Modal visible={modalShown} animationType="fade" transparent={true}>
+          <View style={styles.requestModalBackground}>
+            <View style={styles.requestModalContainer}>
+              <Entypo name="location" style={styles.requestModalIcon} />
+
+              <Text style={styles.requestModalTitle}>
+                Permisos de ubicación
+              </Text>
+              <Text style={styles.requestModalTitle2}>
+                Esta aplicación necesita acceso a tu ubicación para una mejor
+                experiencia
+              </Text>
+              <View style={styles.requestModalButtonContainer}>
+                <TouchableOpacity
+                  style={styles.requestModalButton}
+                  onPress={requestPermission}
+                >
+                  <Text style={styles.requestModalButtonText}>Aceptar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.requestModalButton2}
+                  onPress={() => setModalShown(false)}
+                >
+                  <Text style={styles.requestModalButtonText2}>Rechazar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      )}
 
       {isLoggedIn ? (
         isGuard ? (
@@ -275,6 +334,14 @@ export default function homeScreen() {
         )
       ) : (
         <View style={styles.contentContainer}>
+          <MapView
+            style={styles.map}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={mapLocation}
+            showsUserLocation={permissionGranted}
+            showsMyLocationButton={permissionGranted}
+          />
+
           <View style={styles.navbarContainer}>
             <TouchableOpacity onPress={() => router.push("signInRegister")}>
               <FontAwesome name="user-plus" style={styles.navbarIcon} />
