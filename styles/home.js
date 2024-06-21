@@ -88,16 +88,57 @@ export const styles = StyleSheet.create({
     color: colors.main,
   },
 
+  selectSedeModalContainer: {
+    backgroundColor: colors.bg,
+    padding: hp(2),
+    height: hp(50),
+    width: wp(80),
+    borderRadius: hp(4),
+    alignItems: "center",
+  },
+  selectSedeModalTitle: {
+    textAlign: "center",
+    fontSize: hp(4),
+    color: colors.text,
+  },
+  selectSedeModalSedeButton: {
+    width: wp(40),
+    height: hp(5),
+    marginTop: hp(2),
+    borderWidth: 1,
+    borderColor: colors.main,
+    borderRadius: hp(3),
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  selectSedeModalSedeButtonSelected: {
+    width: wp(40),
+    height: hp(5),
+    marginTop: hp(2),
+    backgroundColor: colors.main,
+    borderRadius: hp(3),
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  selectSedeModalSedeButtonText: {
+    fontSize: hp(2),
+    color: colors.main,
+  },
+  selectSedeModalSedeButtonTextSelected: {
+    fontSize: hp(2),
+    color: colors.bg,
+  },
+
   map: {
     ...StyleSheet.absoluteFillObject,
   },
 
   openParkingLotContainer: {
     width: wp(20),
-    height: hp(22),
+    height: hp(21),
     position: "absolute",
     right: wp(2),
-    bottom: hp(14),
+    bottom: hp(15),
   },
   openParkingLotRed: {
     width: wp(10),
@@ -106,7 +147,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: hp(2),
+    marginBottom: hp(2),
     borderRadius: hp(2),
   },
   openParkingLotYellow: {
@@ -116,7 +157,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: hp(2),
+    marginBottom: hp(2),
     borderRadius: hp(2),
   },
   openParkingLotGreen: {
@@ -126,12 +167,29 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: hp(2),
+    marginBottom: hp(2),
     borderRadius: hp(2),
   },
   openParkingLotText: {
     fontSize: hp(1.3),
     color: colors.bg,
+  },
+
+  selectSedeButton: {
+    position: "absolute",
+    right: wp(2),
+    bottom: hp(11),
+    width: wp(20),
+    height: hp(3),
+    borderRadius: hp(3),
+    borderWidth: 1,
+    borderColor: colors.main,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  selectSedeButtonText: {
+    fontSize: hp(2),
+    color: colors.main,
   },
 
   modalBackground: {

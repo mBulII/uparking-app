@@ -13,6 +13,7 @@ import {
   fetchParkingLots,
   increaseParkingLotCapacity,
   decreaseParkingLotCapacity,
+  fetchSedes,
 } from "../../constants/api";
 import MapView, { PROVIDER_GOOGLE, Polygon, Marker } from "react-native-maps";
 import * as Location from "expo-location";
@@ -33,24 +34,35 @@ export default function homeScreen() {
   const { isLoggedIn, isGuard, user } = useStore();
   const [openModal, setOpenModal] = useState(false);
   const [parkingLot, setParkingLot] = useState([]);
+  const [sede, setSede] = useState([]);
+  const [openSedeModal, setOpenSedeModal] = useState(false);
+  const [selectedSede, setSelectedSede] = useState(null);
+  const [filteredParkingLots, setFilteredParkingLots] = useState([]);
   const [selectedParkingLot, setSelectedParkingLot] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [mapLocation, setMapLocation] = useState(null);
+  const [mapLocation, setMapLocation] = useState({
+    latitude: -40.58603418460478,
+    longitude: -73.0901361322407,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
+  });
   useEffect(() => {
-    const fetchParkingLotData = async () => {
+    const fetchParkingLotAndSedesData = async () => {
       try {
         const parkingLotsData = await fetchParkingLots(user.access);
         setParkingLot(parkingLotsData.sort((a, b) => a.id - b.id));
+
+        const sedesData = await fetchSedes();
+        setSede(sedesData.sort((a, b) => a.id - b.id));
       } catch (error) {
-        console.error("Couldn't fetch the parking lots data", error);
+        console.error("Couldn't fetch the parking lots and sedes data", error);
       }
     };
     if (isLoggedIn) {
-      fetchParkingLotData();
+      fetchParkingLotAndSedesData();
     }
 
-    getLocationAsync();
     checkPermission();
   }, []);
 
@@ -361,39 +373,80 @@ export default function homeScreen() {
     };
   };
 
-  const meyerLocation = {
-    latitude: -40.597439564923796,
-    longitude: -73.10427194867697,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  };
-  const ulaLocation = {
-    latitude: -40.5859228767541,
-    longitude: -73.08998029963165,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  };
+  const handleSedeSelection = (sedeId) => {
+    setSelectedSede(sedeId);
+    const filteredLots = parkingLot.filter((lot) => lot.sede === sedeId);
+    setFilteredParkingLots(filteredLots);
 
-  const getLocationAsync = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status === "granted") {
-      const location = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = location.coords;
-      setMapLocation({
-        latitude,
-        longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
-    } else {
-      setMapLocation({
-        latitude: -40.5859228767541,
-        longitude: -73.08998029963165,
-        latitudeDelta: 0.001,
-        longitudeDelta: 0.001,
-      });
+    if (sedeId === "1") {
+      mapRef.current.animateToRegion(
+        {
+          latitude: -40.58603418460478,
+          longitude: -73.0901361322407,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        },
+        1000
+      );
+    } else if (sedeId === "2") {
+      mapRef.current.animateToRegion(
+        {
+          latitude: -40.597567817892546,
+          longitude: -73.1042043467759,
+          latitudeDelta: 0.001,
+          longitudeDelta: 0.001,
+        },
+        1000
+      );
     }
+
+    setOpenSedeModal(false);
   };
+  const renderSedeSelection = () => {
+    return (
+      <Modal animationType="fade" transparent={true}>
+        <View style={styles.requestModalBackground}>
+          <View style={styles.selectSedeModalContainer}>
+            <Text style={styles.selectSedeModalTitle}>Selecciona tu sede:</Text>
+            <ScrollView>
+              {sede.map((sedeItem) => (
+                <TouchableOpacity
+                  key={sedeItem.id}
+                  style={[
+                    styles.selectSedeModalSedeButton,
+                    selectedSede === sedeItem.id &&
+                      styles.selectSedeModalSedeButtonSelected,
+                  ]}
+                  onPress={() => handleSedeSelection(sedeItem.id)}
+                >
+                  <Text
+                    style={[
+                      styles.selectSedeModalSedeButtonText,
+                      selectedSede === sedeItem.id &&
+                        styles.selectSedeModalSedeButtonTextSelected,
+                    ]}
+                  >
+                    {sedeItem.nombre}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
+  useEffect(() => {
+    if (selectedSede === null) {
+      setFilteredParkingLots(parkingLot);
+    } else {
+      const filteredLots = parkingLot.filter(
+        (lot) => lot.sede === selectedSede
+      );
+      setFilteredParkingLots(filteredLots);
+    }
+  }, [selectedSede, parkingLot]);
+
   const getOpenModalButtonColor = (capacidad, capacidad_max) => {
     if (capacidad_max - capacidad <= 2) {
       return styles.openParkingLotRed;
@@ -498,7 +551,7 @@ export default function homeScreen() {
               style={styles.openParkingLotContainer}
               showsVerticalScrollIndicator={false}
             >
-              {parkingLot.map((lot) => {
+              {filteredParkingLots.map((lot) => {
                 const openModalStyle = getOpenModalButtonColor(
                   lot.capacidad,
                   lot.capacidad_max
@@ -514,6 +567,13 @@ export default function homeScreen() {
                 );
               })}
             </ScrollView>
+
+            <TouchableOpacity
+              style={styles.selectSedeButton}
+              onPress={() => setOpenSedeModal(true)}
+            >
+              <Text style={styles.selectSedeButtonText}>Sede</Text>
+            </TouchableOpacity>
 
             <View style={styles.navbarContainer}>
               <TouchableOpacity onPress={() => router.push("myAccountGuard")}>
@@ -532,6 +592,7 @@ export default function homeScreen() {
               </TouchableOpacity>
             </View>
             {renderVigilanteModal()}
+            {openSedeModal && renderSedeSelection()}
           </View>
         ) : (
           <View style={styles.contentContainer}>
@@ -586,7 +647,7 @@ export default function homeScreen() {
               style={styles.openParkingLotContainer}
               showsVerticalScrollIndicator={false}
             >
-              {parkingLot.map((lot) => {
+              {filteredParkingLots.map((lot) => {
                 const openModalStyle = getOpenModalButtonColor(
                   lot.capacidad,
                   lot.capacidad_max
@@ -602,6 +663,13 @@ export default function homeScreen() {
                 );
               })}
             </ScrollView>
+
+            <TouchableOpacity
+              style={styles.selectSedeButton}
+              onPress={() => setOpenSedeModal(true)}
+            >
+              <Text style={styles.selectSedeButtonText}>Sede</Text>
+            </TouchableOpacity>
 
             <View style={styles.navbarContainer}>
               <TouchableOpacity onPress={() => router.push("myAccount")}>
@@ -621,6 +689,7 @@ export default function homeScreen() {
               </TouchableOpacity>
             </View>
             {renderUserModal()}
+            {openSedeModal && renderSedeSelection()}
           </View>
         )
       ) : (

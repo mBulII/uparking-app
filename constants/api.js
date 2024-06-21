@@ -220,3 +220,12 @@ export const increaseParkingLotCapacity = async (parkingLotId, accessToken) => {
     throw error;
   }
 };
+
+export const fetchSedes = async () => {
+  try {
+    const response = await axios.get(`${apiURL}/sedes/`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
