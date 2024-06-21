@@ -60,17 +60,6 @@ export const refreshToken = async (refreshToken) => {
   }
 };
 
-export const verifyToken = async (accessToken) => {
-  try {
-    const response = await axios.post(`${authURL}/token/verify/`, {
-      token: accessToken,
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const carFeatures = async (formData, accessToken) => {
   try {
     const response = await axios.post(`${apiURL}/patentes/`, formData, {
