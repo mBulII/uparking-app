@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, Modal } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { useStore } from "../../stateManagement/store";
 import {
@@ -7,12 +14,11 @@ import {
   increaseParkingLotCapacity,
   decreaseParkingLotCapacity,
 } from "../../constants/api";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Polygon, Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { usePermission } from "../../hooks/locationPermission";
 
 import { styles } from "../../styles/home";
-import { hp } from "../../constants/device";
 import {
   FontAwesome,
   FontAwesome6,
@@ -23,12 +29,14 @@ import {
 
 export default function homeScreen() {
   const router = useRouter();
+  const mapRef = useRef(null);
   const { isLoggedIn, isGuard, user } = useStore();
   const [openModal, setOpenModal] = useState(false);
   const [parkingLot, setParkingLot] = useState([]);
   const [selectedParkingLot, setSelectedParkingLot] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [mapLocation, setMapLocation] = useState(null);
   useEffect(() => {
     const fetchParkingLotData = async () => {
       try {
@@ -38,9 +46,11 @@ export default function homeScreen() {
         console.error("Couldn't fetch the parking lots data", error);
       }
     };
-    if (isGuard) {
+    if (isLoggedIn) {
       fetchParkingLotData();
     }
+
+    getLocationAsync();
     checkPermission();
   }, []);
 
@@ -48,8 +58,24 @@ export default function homeScreen() {
   const onTouch = () => {
     setFeedbackMessage("");
   };
-  const handleOpenModal = (parkingLot) => {
-    setSelectedParkingLot(parkingLot);
+
+  const { permissionGranted, setPermissionGranted, modalShown, setModalShown } =
+    usePermission();
+  const checkPermission = async () => {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    setPermissionGranted(status === "granted");
+    if (status !== "granted" && !modalShown) {
+      setModalShown(true);
+    }
+  };
+  const requestPermission = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    setPermissionGranted(status === "granted");
+    setModalShown(false);
+  };
+
+  const handleOpenModal = (lot) => {
+    setSelectedParkingLot(lot);
     setOpenModal(true);
   };
   const handleCloseModal = () => {
@@ -120,23 +146,29 @@ export default function homeScreen() {
         name: "alert-circle",
         style: styles.modalRedIcon,
         styleText: styles.modalModifyNumberTextRed,
+        messageStyle: styles.modalCapacityMessageRed,
+        message: "Prefiera otro estacionamiento",
       };
     } else if (capacidad < capacidad_max / 2) {
       return {
         name: "check-circle",
         style: styles.modalGreenIcon,
         styleText: styles.modalModifyNumberTextGreen,
+        messageStyle: styles.modalCapacityMessageGreen,
+        message: "Estacionamiento libre",
       };
     } else {
       return {
         name: "alert-circle-outline",
         style: styles.modalYellowIcon,
         styleText: styles.modalModifyNumberTextYellow,
+        messageStyle: styles.modalCapacityMessageYellow,
+        message: "Algunos estacionamientos disponibles",
       };
     }
   };
 
-  const renderModal = () => {
+  const renderVigilanteModal = () => {
     if (!selectedParkingLot) return null;
     const { name, style, styleText } = getParkingLotIconAndNumberColor();
 
@@ -218,26 +250,158 @@ export default function homeScreen() {
     );
   };
 
-  const { permissionGranted, setPermissionGranted, modalShown, setModalShown } =
-    usePermission();
-  const checkPermission = async () => {
-    const { status } = await Location.getForegroundPermissionsAsync();
-    setPermissionGranted(status === "granted");
-    if (status !== "granted" && !modalShown) {
-      setModalShown(true);
-    }
-  };
-  const requestPermission = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    setPermissionGranted(status === "granted");
-    setModalShown(false);
+  const renderUserModal = () => {
+    if (!selectedParkingLot) return null;
+    const { name, style, messageStyle, message } =
+      getParkingLotIconAndNumberColor();
+
+    return (
+      <Modal visible={openModal} animationType="fade" transparent={true}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalTitleContainer}>
+              <Text style={styles.modalTitle1}>Estacionamiento</Text>
+              <Text style={styles.modalTitle2}>
+                {" "}
+                {selectedParkingLot.nombre}
+              </Text>
+              <MaterialCommunityIcons name={name} style={style} />
+            </View>
+
+            <View style={styles.modalTextContainer}>
+              <Text style={styles.modalText}>
+                Capacidad del estacionamiento:
+              </Text>
+              <Text style={styles.modalText}>
+                {" "}
+                {selectedParkingLot.capacidad_max}
+              </Text>
+            </View>
+            <View style={styles.modalTextContainer}>
+              <Text style={styles.modalText}>Estacionamientos ocupados:</Text>
+              <Text style={styles.modalText}>
+                {" "}
+                {selectedParkingLot.capacidad}
+              </Text>
+            </View>
+            <View style={styles.modalTextContainer}>
+              <Text style={styles.modalText}>
+                Estacionamientos desocupados:
+              </Text>
+              <Text style={styles.modalText}>
+                {" "}
+                {selectedParkingLot.capacidad_max -
+                  selectedParkingLot.capacidad}
+              </Text>
+            </View>
+
+            <Text style={messageStyle}>{message}</Text>
+
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={handleCloseModal}
+            >
+              <Text style={styles.modalCloseButtonText}>Finalizar</Text>
+            </TouchableOpacity>
+
+            {feedbackMessage ? (
+              <View style={styles.feedbackContainer}>
+                <Text style={styles.feedbackText}>{feedbackMessage}</Text>
+                <TouchableOpacity onPress={onTouch}>
+                  <Text style={styles.feedBackClose}>Cerrar</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+          </View>
+        </View>
+      </Modal>
+    );
   };
 
-  const mapLocation = {
+  const handleMapButtonPressed = (lot) => {
+    setSelectedParkingLot(lot);
+    const { coordinates } = lot.area_espacio;
+    const center = {
+      latitude: coordinates[0][0][0],
+      longitude: coordinates[0][0][1],
+      latitudeDelta: 0.0001,
+      longitudeDelta: 0.0001,
+    };
+
+    mapRef.current.animateToRegion(center, 1000);
+  };
+  const getPolygonCentroid = (coordinates) => {
+    let latitudeSum = 0;
+    let longitudeSum = 0;
+    coordinates.forEach((coord) => {
+      latitudeSum += coord.latitude;
+      longitudeSum += coord.longitude;
+    });
+    const numPoints = coordinates.length;
+    return {
+      latitude: latitudeSum / numPoints,
+      longitude: longitudeSum / numPoints,
+    };
+  };
+  const getPolygonColors = (capacidad, capacidad_max, isSelected) => {
+    const borderColor = isSelected ? "#0055B7" : "rgba(0,0,0,0.5)";
+    let fillColor;
+
+    if (capacidad_max - capacidad <= 2) {
+      fillColor = "#E55252";
+    } else if (capacidad < capacidad_max / 2) {
+      fillColor = "#81F777";
+    } else {
+      fillColor = "#DDDE7D";
+    }
+
+    return {
+      fillColor: `${fillColor}55`,
+      strokeColor: borderColor,
+    };
+  };
+
+  const meyerLocation = {
     latitude: -40.597439564923796,
     longitude: -73.10427194867697,
-    latitudeDelta: 0,
-    longitudeDelta: 0,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  };
+  const ulaLocation = {
+    latitude: -40.5859228767541,
+    longitude: -73.08998029963165,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  };
+
+  const getLocationAsync = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status === "granted") {
+      const location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+      setMapLocation({
+        latitude,
+        longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      });
+    } else {
+      setMapLocation({
+        latitude: -40.5859228767541,
+        longitude: -73.08998029963165,
+        latitudeDelta: 0.001,
+        longitudeDelta: 0.001,
+      });
+    }
+  };
+  const getOpenModalButtonColor = (capacidad, capacidad_max) => {
+    if (capacidad_max - capacidad <= 2) {
+      return styles.openParkingLotRed;
+    } else if (capacidad < capacidad_max / 2) {
+      return styles.openParkingLotGreen;
+    } else {
+      return styles.openParkingLotYellow;
+    }
   };
 
   return (
@@ -283,15 +447,73 @@ export default function homeScreen() {
       {isLoggedIn ? (
         isGuard ? (
           <View style={styles.contentContainer}>
-            {parkingLot.map((lot) => (
-              <TouchableOpacity
-                key={lot.id}
-                style={styles.modalTest}
-                onPress={() => handleOpenModal(lot)}
-              >
-                <Text style={styles.modalOpenText}>{lot.nombre}</Text>
-              </TouchableOpacity>
-            ))}
+            <MapView
+              ref={mapRef}
+              style={styles.map}
+              provider={PROVIDER_GOOGLE}
+              initialRegion={mapLocation}
+              showsUserLocation={permissionGranted}
+              showsMyLocationButton={permissionGranted}
+            >
+              {parkingLot.map((lot) => {
+                const coordinates = lot.area_espacio.coordinates[0].map(
+                  (coord) => ({
+                    latitude: coord[0],
+                    longitude: coord[1],
+                  })
+                );
+                const isSelected =
+                  selectedParkingLot && selectedParkingLot.id === lot.id;
+                const centroid = getPolygonCentroid(coordinates);
+
+                return (
+                  <React.Fragment key={lot.id}>
+                    {(() => {
+                      const { fillColor, strokeColor } = getPolygonColors(
+                        lot.capacidad,
+                        lot.capacidad_max,
+                        isSelected
+                      );
+
+                      return (
+                        <Polygon
+                          coordinates={coordinates}
+                          strokeColor={strokeColor}
+                          fillColor={fillColor}
+                          strokeWidth={isSelected ? 2 : 1}
+                          onPress={() => handleOpenModal(lot)}
+                        />
+                      );
+                    })()}
+                    <Marker
+                      coordinate={centroid}
+                      onPress={() => handleOpenModal(lot)}
+                    />
+                  </React.Fragment>
+                );
+              })}
+            </MapView>
+
+            <ScrollView
+              style={styles.openParkingLotContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              {parkingLot.map((lot) => {
+                const openModalStyle = getOpenModalButtonColor(
+                  lot.capacidad,
+                  lot.capacidad_max
+                );
+                return (
+                  <TouchableOpacity
+                    key={lot.id}
+                    style={openModalStyle}
+                    onPress={() => handleMapButtonPressed(lot)}
+                  >
+                    <Text style={styles.openParkingLotText}>{lot.nombre}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
 
             <View style={styles.navbarContainer}>
               <TouchableOpacity onPress={() => router.push("myAccountGuard")}>
@@ -309,10 +531,78 @@ export default function homeScreen() {
                 />
               </TouchableOpacity>
             </View>
-            {renderModal()}
+            {renderVigilanteModal()}
           </View>
         ) : (
           <View style={styles.contentContainer}>
+            <MapView
+              ref={mapRef}
+              style={styles.map}
+              provider={PROVIDER_GOOGLE}
+              initialRegion={mapLocation}
+              showsUserLocation={permissionGranted}
+              showsMyLocationButton={permissionGranted}
+            >
+              {parkingLot.map((lot) => {
+                const coordinates = lot.area_espacio.coordinates[0].map(
+                  (coord) => ({
+                    latitude: coord[0],
+                    longitude: coord[1],
+                  })
+                );
+                const isSelected =
+                  selectedParkingLot && selectedParkingLot.id === lot.id;
+                const centroid = getPolygonCentroid(coordinates);
+
+                return (
+                  <React.Fragment key={lot.id}>
+                    {(() => {
+                      const { fillColor, strokeColor } = getPolygonColors(
+                        lot.capacidad,
+                        lot.capacidad_max,
+                        isSelected
+                      );
+
+                      return (
+                        <Polygon
+                          coordinates={coordinates}
+                          strokeColor={strokeColor}
+                          fillColor={fillColor}
+                          strokeWidth={isSelected ? 2 : 1}
+                          onPress={() => handleOpenModal(lot)}
+                        />
+                      );
+                    })()}
+                    <Marker
+                      coordinate={centroid}
+                      onPress={() => handleOpenModal(lot)}
+                    />
+                  </React.Fragment>
+                );
+              })}
+            </MapView>
+
+            <ScrollView
+              style={styles.openParkingLotContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              {parkingLot.map((lot) => {
+                const openModalStyle = getOpenModalButtonColor(
+                  lot.capacidad,
+                  lot.capacidad_max
+                );
+                return (
+                  <TouchableOpacity
+                    key={lot.id}
+                    style={openModalStyle}
+                    onPress={() => handleMapButtonPressed(lot)}
+                  >
+                    <Text style={styles.openParkingLotText}>{lot.nombre}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+
             <View style={styles.navbarContainer}>
               <TouchableOpacity onPress={() => router.push("myAccount")}>
                 <FontAwesome name="user" style={styles.navbarIcon} />
@@ -330,6 +620,7 @@ export default function homeScreen() {
                 />
               </TouchableOpacity>
             </View>
+            {renderUserModal()}
           </View>
         )
       ) : (

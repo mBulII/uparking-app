@@ -92,17 +92,45 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
 
-  modalTest: {
-    width: wp(30),
+  openParkingLotContainer: {
+    width: wp(20),
+    height: hp(22),
+    position: "absolute",
+    right: wp(2),
+    bottom: hp(14),
+  },
+  openParkingLotRed: {
+    width: wp(10),
     height: hp(5),
-    backgroundColor: colors.main,
+    backgroundColor: colors.red,
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: hp(3),
+    marginTop: hp(2),
+    borderRadius: hp(2),
   },
-  modalOpenText: {
-    fontSize: hp(2),
+  openParkingLotYellow: {
+    width: wp(10),
+    height: hp(5),
+    backgroundColor: colors.yellow,
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: hp(2),
+    borderRadius: hp(2),
+  },
+  openParkingLotGreen: {
+    width: wp(10),
+    height: hp(5),
+    backgroundColor: colors.green,
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: hp(2),
+    borderRadius: hp(2),
+  },
+  openParkingLotText: {
+    fontSize: hp(1.3),
     color: colors.bg,
   },
 
@@ -196,6 +224,24 @@ export const styles = StyleSheet.create({
   modalModifyNumberTextGreen: {
     fontSize: hp(4),
     color: colors.green,
+  },
+  modalCapacityMessageRed: {
+    fontSize: hp(4),
+    color: colors.red,
+    marginTop: hp(8),
+    textAlign: "center",
+  },
+  modalCapacityMessageYellow: {
+    fontSize: hp(4),
+    color: colors.yellow,
+    marginTop: hp(8),
+    textAlign: "center",
+  },
+  modalCapacityMessageGreen: {
+    fontSize: hp(4),
+    color: colors.green,
+    marginTop: hp(8),
+    textAlign: "center",
   },
   modalCloseButton: {
     height: hp(7),
