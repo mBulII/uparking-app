@@ -127,11 +127,4 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 30,
   },
-  feedBackGoToLogin: {
-    fontSize: hp(3),
-    fontWeight: "bold",
-    color: colors.red,
-    textAlign: "center",
-    paddingTop: 1,
-  },
 });

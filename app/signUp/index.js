@@ -37,7 +37,7 @@ export default function signUpScreen() {
     try {
       await registerUser(formData);
       setFeedbackMessage(
-        "Tu cuenta se ha creado de forma exitosa, puedes iniciar sesión"
+        "Tu cuenta se ha creado de forma exitosa, revisa tu correo para validar tu cuenta"
       );
       setAccountCreated(true);
     } catch (error) {
@@ -297,15 +297,9 @@ export default function signUpScreen() {
       {feedbackMessage ? (
         <View style={styles.feedbackContainer}>
           <Text style={styles.feedbackText}>{feedbackMessage}</Text>
-          {accountCreated ? (
-            <TouchableOpacity onPress={() => router.push("login")}>
-              <Text style={styles.feedBackGoToLogin}>aquí</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={onTouch}>
-              <Text style={styles.feedBackClose}>Cerrar</Text>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity onPress={onTouch}>
+            <Text style={styles.feedBackClose}>Cerrar</Text>
+          </TouchableOpacity>
         </View>
       ) : null}
     </ScrollView>

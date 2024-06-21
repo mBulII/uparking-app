@@ -33,7 +33,9 @@ export default function loginScreen() {
       setUser(userData);
       router.push("home");
     } catch (error) {
-      setFeedbackMessage("Los datos proporcionados no son válidos");
+      setFeedbackMessage(
+        "Los datos proporcionados no son válidos o la cuenta no esta verificada"
+      );
     }
   };
 
