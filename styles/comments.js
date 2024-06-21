@@ -46,6 +46,11 @@ export const styles = StyleSheet.create({
     marginTop: hp(2),
     borderRadius: 22,
   },
+  errorText: {
+    fontSize: hp(1.5),
+    color: colors.red,
+    marginLeft: wp(4),
+  },
 
   imageButton: {
     width: wp(50),
@@ -125,5 +130,30 @@ export const styles = StyleSheet.create({
   button2Text: {
     fontSize: hp(3),
     color: colors.bg,
+  },
+
+  feedbackContainer: {
+    position: "absolute",
+    top: hp(30),
+    left: wp(15),
+    backgroundColor: colors.main,
+    borderRadius: 20,
+    height: hp(30),
+    width: wp(70),
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+  feedbackText: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.bg,
+    textAlign: "center",
+    paddingBottom: 30,
+  },
+  feedBackClose: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: colors.red,
+    textAlign: "center",
   },
 });

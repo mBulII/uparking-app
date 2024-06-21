@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -26,11 +26,9 @@ import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 export default function signUpScreen() {
   const router = useRouter();
-  const [feedbackMessage, setFeedbackMessage] = React.useState("");
-  const [accountCreated, setAccountCreated] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {
     setFeedbackMessage("");
-    setAccountCreated(false);
   };
 
   const handleAccountCreation = async (formData) => {
@@ -39,7 +37,6 @@ export default function signUpScreen() {
       setFeedbackMessage(
         "Tu cuenta se ha creado de forma exitosa, revisa tu correo para validar tu cuenta"
       );
-      setAccountCreated(true);
     } catch (error) {
       setFeedbackMessage("No se pudo crear tu cuenta, intentalo denuevo");
     }

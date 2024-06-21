@@ -4,8 +4,7 @@ import { authURL, apiURL } from "./URL";
 
 export const registerUser = async (formData) => {
   try {
-    const response = await axios.post(`${authURL}/registration/`, formData);
-    return response.data;
+    await axios.post(`${authURL}/registration/`, formData);
   } catch (error) {
     throw error;
   }
@@ -241,6 +240,14 @@ export const fetchSedes = async () => {
   try {
     const response = await axios.get(`${apiURL}/sedes/`);
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const sendFeedback = async (formData) => {
+  try {
+    await axios.post(`${apiURL}/feedback/`, formData);
   } catch (error) {
     throw error;
   }

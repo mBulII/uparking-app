@@ -91,3 +91,7 @@ export const reportLicensePlate = {
 export const reportEstacionamiento = {
   required: "Debes seleccionar un estacionamiento",
 };
+
+export const feedback = {
+  required: "Debes escribir tu comentario",
+};
