@@ -6,6 +6,7 @@ import {
   fetchNotificationVigilante,
   fetchCarFeaturesVigilante,
   fetchParkingLots,
+  deleteNotificationVigilante,
 } from "../../constants/api";
 
 import { styles } from "../../styles/reportHistory";
@@ -86,6 +87,14 @@ export default function reportHistoryScreen() {
     }
   };
 
+  const handleNotificationDelete = async (notificationId) => {
+    try {
+      await deleteNotificationVigilante(notificationId, user.access);
+    } catch (error) {
+      setFeedbackMessage("No fue posible borrar la notificaion");
+    }
+  };
+
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {
     setFeedbackMessage("");
@@ -106,6 +115,12 @@ export default function reportHistoryScreen() {
 
           {notifications.map((notification, index) => (
             <View key={index} style={styles.reportContainer}>
+              <TouchableOpacity
+                style={styles.deleteNotificationContainer}
+                onPress={() => handleNotificationDelete(notification.id)}
+              >
+                <Text style={styles.deleteNotificationText}>Eliminar</Text>
+              </TouchableOpacity>
               {getIconForMessage(notification.mensaje)}
               <Text style={styles.reportText}>{notification.mensaje}</Text>
               <Text style={styles.reportText}>

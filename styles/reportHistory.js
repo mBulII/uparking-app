@@ -38,6 +38,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: hp(3),
+    position: "relative",
+  },
+  deleteNotificationContainer: {
+    position: "absolute",
+    right: wp(2),
+    top: hp(1),
+  },
+  deleteNotificationText: {
+    fontSize: hp(1.5),
+    color: colors.red,
   },
   reportIcon: {
     fontSize: hp(6),

@@ -173,6 +173,22 @@ export const fetchNotificationVigilante = async (accessToken) => {
   }
 };
 
+export const deleteNotificationVigilante = async (
+  notificationId,
+  accessToken
+) => {
+  try {
+    await axios.delete(`${apiURL}/patentes/${notificationId}/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchNotificationUser = async (accessToken) => {
   try {
     const response = await axios.get(`${apiURL}/notificaciones/`, {
