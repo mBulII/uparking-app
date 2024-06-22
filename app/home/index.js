@@ -23,7 +23,6 @@ import { styles } from "../../styles/home";
 import {
   FontAwesome,
   FontAwesome6,
-  MaterialIcons,
   MaterialCommunityIcons,
   Entypo,
 } from "@expo/vector-icons";
@@ -47,10 +46,11 @@ export default function homeScreen() {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   });
+  const websocketRef = useRef(null);
   useEffect(() => {
     const fetchParkingLotAndSedesData = async () => {
       try {
-        const parkingLotsData = await fetchParkingLots(user.access);
+        const parkingLotsData = await fetchParkingLots();
         setParkingLot(parkingLotsData.sort((a, b) => a.id - b.id));
 
         const sedesData = await fetchSedes();
@@ -59,11 +59,27 @@ export default function homeScreen() {
         console.error("Couldn't fetch the parking lots and sedes data", error);
       }
     };
-    if (isLoggedIn) {
-      fetchParkingLotAndSedesData();
-    }
 
+    fetchParkingLotAndSedesData();
     checkPermission();
+
+    websocketRef.current = new WebSocket(
+      "ws://192.168.43.74/ws/estacionamientos"
+    );
+    websocketRef.current.onopen = () => {};
+    websocketRef.current.onmessage = () => {
+      fetchParkingLotAndSedesData();
+    };
+    websocketRef.current.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+    websocketRef.current.onclose = () => {};
+
+    return () => {
+      if (websocketRef.current) {
+        websocketRef.current.close();
+      }
+    };
   }, []);
 
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -547,6 +563,7 @@ export default function homeScreen() {
               })}
             </MapView>
 
+            <FontAwesome name="sort-up" style={styles.arrowUpIcon} />
             <ScrollView
               style={styles.openParkingLotContainer}
               showsVerticalScrollIndicator={false}
@@ -567,6 +584,7 @@ export default function homeScreen() {
                 );
               })}
             </ScrollView>
+            <FontAwesome name="sort-down" style={styles.arrowDownIcon} />
 
             <TouchableOpacity
               style={styles.selectSedeButton}
@@ -575,12 +593,9 @@ export default function homeScreen() {
               <Text style={styles.selectSedeButtonText}>Sede</Text>
             </TouchableOpacity>
 
-            <View style={styles.navbarContainer}>
+            <View style={styles.navbarContainer2}>
               <TouchableOpacity onPress={() => router.push("myAccountGuard")}>
                 <FontAwesome6 name="user-shield" style={styles.navbarIcon} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <MaterialIcons name="menu-book" style={styles.navbarIcon} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => router.push("notificationGuard")}
@@ -643,6 +658,7 @@ export default function homeScreen() {
               })}
             </MapView>
 
+            <FontAwesome name="sort-up" style={styles.arrowUpIcon} />
             <ScrollView
               style={styles.openParkingLotContainer}
               showsVerticalScrollIndicator={false}
@@ -663,6 +679,7 @@ export default function homeScreen() {
                 );
               })}
             </ScrollView>
+            <FontAwesome name="sort-down" style={styles.arrowDownIcon} />
 
             <TouchableOpacity
               style={styles.selectSedeButton}
@@ -674,9 +691,6 @@ export default function homeScreen() {
             <View style={styles.navbarContainer}>
               <TouchableOpacity onPress={() => router.push("myAccount")}>
                 <FontAwesome name="user" style={styles.navbarIcon} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <MaterialIcons name="menu-book" style={styles.navbarIcon} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => router.push("notification")}>
                 <FontAwesome name="bell" style={styles.navbarIcon} />
@@ -695,24 +709,92 @@ export default function homeScreen() {
       ) : (
         <View style={styles.contentContainer}>
           <MapView
+            ref={mapRef}
             style={styles.map}
             provider={PROVIDER_GOOGLE}
             initialRegion={mapLocation}
             showsUserLocation={permissionGranted}
             showsMyLocationButton={permissionGranted}
-          />
+          >
+            {parkingLot.map((lot) => {
+              const coordinates = lot.area_espacio.coordinates[0].map(
+                (coord) => ({
+                  latitude: coord[0],
+                  longitude: coord[1],
+                })
+              );
+              const isSelected =
+                selectedParkingLot && selectedParkingLot.id === lot.id;
+              const centroid = getPolygonCentroid(coordinates);
 
-          <View style={styles.navbarContainer}>
+              return (
+                <React.Fragment key={lot.id}>
+                  {(() => {
+                    const { fillColor, strokeColor } = getPolygonColors(
+                      lot.capacidad,
+                      lot.capacidad_max,
+                      isSelected
+                    );
+
+                    return (
+                      <Polygon
+                        coordinates={coordinates}
+                        strokeColor={strokeColor}
+                        fillColor={fillColor}
+                        strokeWidth={isSelected ? 2 : 1}
+                        onPress={() => handleOpenModal(lot)}
+                      />
+                    );
+                  })()}
+                  <Marker
+                    coordinate={centroid}
+                    onPress={() => handleOpenModal(lot)}
+                  />
+                </React.Fragment>
+              );
+            })}
+          </MapView>
+
+          <FontAwesome name="sort-up" style={styles.arrowUpIcon} />
+          <ScrollView
+            style={styles.openParkingLotContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            {filteredParkingLots.map((lot) => {
+              const openModalStyle = getOpenModalButtonColor(
+                lot.capacidad,
+                lot.capacidad_max
+              );
+              return (
+                <TouchableOpacity
+                  key={lot.id}
+                  style={openModalStyle}
+                  onPress={() => handleMapButtonPressed(lot)}
+                >
+                  <Text style={styles.openParkingLotText}>{lot.nombre}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+          <FontAwesome name="sort-down" style={styles.arrowDownIcon} />
+
+          <TouchableOpacity
+            style={styles.selectSedeButton}
+            onPress={() => setOpenSedeModal(true)}
+          >
+            <Text style={styles.selectSedeButtonText}>Sede</Text>
+          </TouchableOpacity>
+
+          <View style={styles.navbarContainer2}>
             <TouchableOpacity onPress={() => router.push("signInRegister")}>
               <FontAwesome name="user-plus" style={styles.navbarIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <MaterialIcons name="menu-book" style={styles.navbarIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => router.push("comments")}>
               <FontAwesome6 name="chalkboard-user" style={styles.navbarIcon} />
             </TouchableOpacity>
           </View>
+          {renderUserModal()}
+          {openSedeModal && renderSedeSelection()}
         </View>
       )}
     </View>

@@ -130,6 +130,12 @@ export const styles = StyleSheet.create({
     borderRadius: 22,
     fontSize: hp(2),
   },
+  errorTextBigInput: {
+    fontSize: hp(1.5),
+    color: colors.red,
+    marginLeft: wp(6),
+    marginBottom: hp(4),
+  },
 
   imageButton: {
     width: wp(50),

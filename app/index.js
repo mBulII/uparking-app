@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 import { styles } from "../styles/welcome";
 import * as NavigationBar from "expo-navigation-bar";
 import { LinearGradient } from "expo-linear-gradient";
+import Welcome from "../assets/images/welcome.svg";
 
 export default function welcomeScreen() {
   const router = useRouter();
@@ -22,10 +23,7 @@ export default function welcomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/images/test.jpg")}
-        style={styles.image}
-      />
+      <Welcome style={styles.image} />
       <LinearGradient
         colors={[
           "rgba(255,255,255,0)",

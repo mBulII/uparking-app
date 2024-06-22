@@ -11,12 +11,9 @@ export const styles = StyleSheet.create({
   },
 
   image: {
-    position: "absolute",
-    marginTop: hp(40),
     height: hp(10),
-    width: wp(120),
-    transform: [{ rotate: "20deg" }],
-    left: wp(-10),
+    width: wp(100),
+    marginTop: hp(11),
   },
 
   gradient: {

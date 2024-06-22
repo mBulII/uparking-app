@@ -169,6 +169,7 @@ export default function addReportScreen() {
     try {
       await sendNotification(formData, user.access);
       setFeedbackMessage("El reporte sa ha enviado con exito");
+      reset({ patente: "" }, { comment: "" });
     } catch (error) {
       setFeedbackMessage(
         "No se pudo enviar el reporte, intentelo denuevo o vuelva a iniciar sesión"
@@ -180,6 +181,7 @@ export default function addReportScreen() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -264,7 +266,7 @@ export default function addReportScreen() {
                     maxLength={170}
                   />
                   {errors.comment && (
-                    <Text style={styles.errorText}>
+                    <Text style={styles.errorTextBigInput}>
                       {errors.comment.message}
                     </Text>
                   )}
@@ -272,7 +274,7 @@ export default function addReportScreen() {
               )}
             />
           )}
-
+          {/*  
           <Text style={styles.labelText}>Imagen (No obligatorio)</Text>
           <TouchableOpacity style={styles.imageButton}>
             <FontAwesome name="image" style={styles.imageIcon} />
@@ -283,6 +285,7 @@ export default function addReportScreen() {
             <FontAwesome name="camera" style={styles.cameraIcon} />
             <Text style={styles.cameraText}>Tomar una foto</Text>
           </TouchableOpacity>
+*/}
         </ScrollView>
       ) : null}
       <View style={styles.bottomButtonContainer}>

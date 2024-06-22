@@ -14,7 +14,6 @@ import { sendFeedback } from "../../constants/api";
 import { feedback } from "../../constants/validation";
 
 import { styles } from "../../styles/comments";
-import { FontAwesome } from "@expo/vector-icons";
 
 export default function commentsScreen() {
   const router = useRouter();
@@ -88,7 +87,7 @@ export default function commentsScreen() {
               </>
             )}
           />
-
+          {/* 
           <TouchableOpacity style={styles.imageButton}>
             <FontAwesome name="image" style={styles.imageIcon} />
             <Text style={styles.imageText}>Seleccionar archivo</Text>
@@ -98,7 +97,7 @@ export default function commentsScreen() {
             <FontAwesome name="camera" style={styles.cameraIcon} />
             <Text style={styles.cameraText}>Tomar una foto</Text>
           </TouchableOpacity>
-
+ */}
           <TouchableOpacity
             style={styles.button1}
             onPress={handleSubmit(handleFeedbackSubmit)}

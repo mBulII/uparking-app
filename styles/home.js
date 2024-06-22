@@ -133,12 +133,29 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
 
+  arrowUpIcon: {
+    position: "absolute",
+    zIndex: 1,
+    color: colors.main,
+    fontSize: hp(3),
+    right: wp(10.3),
+    bottom: hp(34.5),
+  },
+  arrowDownIcon: {
+    position: "absolute",
+    zIndex: 1,
+    color: colors.main,
+    fontSize: hp(3),
+    right: wp(10.3),
+    bottom: hp(15.3),
+  },
+
   openParkingLotContainer: {
     width: wp(20),
-    height: hp(21),
+    height: hp(19),
     position: "absolute",
     right: wp(2),
-    bottom: hp(15),
+    bottom: hp(17),
   },
   openParkingLotRed: {
     width: wp(10),
@@ -148,7 +165,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: hp(2),
-    borderRadius: hp(2),
+    borderRadius: hp(1.5),
   },
   openParkingLotYellow: {
     width: wp(10),
@@ -158,7 +175,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: hp(2),
-    borderRadius: hp(2),
+    borderRadius: hp(1.5),
   },
   openParkingLotGreen: {
     width: wp(10),
@@ -168,7 +185,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: hp(2),
-    borderRadius: hp(2),
+    borderRadius: hp(1.5),
   },
   openParkingLotText: {
     fontSize: hp(1.3),
@@ -316,6 +333,19 @@ export const styles = StyleSheet.create({
     color: colors.bg,
   },
 
+  navbarContainer2: {
+    backgroundColor: colors.main,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    paddingHorizontal: wp(10),
+    borderTopLeftRadius: hp(4),
+    borderTopRightRadius: hp(4),
+    height: hp(10),
+    position: "absolute",
+    bottom: 0,
+    width: wp(100),
+  },
   navbarContainer: {
     backgroundColor: colors.main,
     flexDirection: "row",

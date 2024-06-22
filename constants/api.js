@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { authURL, apiURL, v1URL } from "./URL";
+import { authURL, v1URL } from "./URL";
 
 export const registerUser = async (formData) => {
   try {
@@ -21,17 +21,7 @@ export const loginUser = async (formData) => {
 
 export const passwordReset = async (formData) => {
   try {
-    const response = await axios.post(`${authURL}/password/reset/`, formData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const passwordChange = async (formData) => {
-  try {
-    const response = await axios.post(`${authURL}/password/change/`, formData);
-    return response.data;
+    await axios.post(`${authURL}/password/reset/`, formData);
   } catch (error) {
     throw error;
   }
@@ -62,7 +52,7 @@ export const refreshToken = async (refreshToken) => {
 
 export const carFeatures = async (formData, accessToken) => {
   try {
-    const response = await axios.post(`${apiURL}/patentes/`, formData, {
+    const response = await axios.post(`${v1URL}/patentes/`, formData, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
@@ -76,7 +66,7 @@ export const carFeatures = async (formData, accessToken) => {
 
 export const fetchCarFeatures = async (accessToken) => {
   try {
-    const response = await axios.get(`${apiURL}/patentes/`, {
+    const response = await axios.get(`${v1URL}/patentes/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
@@ -104,7 +94,7 @@ export const fetchCarFeaturesVigilante = async (accessToken) => {
 
 export const deleteCarData = async (carId, accessToken) => {
   try {
-    await axios.delete(`${apiURL}/patentes/${carId}/`, {
+    await axios.delete(`${v1URL}/patentes/${carId}/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
@@ -115,14 +105,9 @@ export const deleteCarData = async (carId, accessToken) => {
   }
 };
 
-export const fetchParkingLots = async (accessToken) => {
+export const fetchParkingLots = async () => {
   try {
-    const response = await axios.get(`${apiURL}/estacionamientos/`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.get(`${v1URL}/estacionamientos/`);
     return response.data;
   } catch (error) {
     throw error;
@@ -166,7 +151,7 @@ export const deleteNotificationVigilante = async (
   accessToken
 ) => {
   try {
-    await axios.delete(`${apiURL}/patentes/${notificationId}/`, {
+    await axios.delete(`${v1URL}/vigilante/notificaciones/${notificationId}/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
@@ -179,7 +164,7 @@ export const deleteNotificationVigilante = async (
 
 export const fetchNotificationUser = async (accessToken) => {
   try {
-    const response = await axios.get(`${apiURL}/notificaciones/`, {
+    const response = await axios.get(`${v1URL}/notificaciones/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
@@ -194,7 +179,7 @@ export const fetchNotificationUser = async (accessToken) => {
 export const decreaseParkingLotCapacity = async (parkingLotId, accessToken) => {
   try {
     await axios.put(
-      `${apiURL}/vigilante/decrease-capacidad/${parkingLotId}/`,
+      `${v1URL}/vigilante/decrease-capacidad/${parkingLotId}/`,
       {},
       {
         headers: {
@@ -211,7 +196,7 @@ export const decreaseParkingLotCapacity = async (parkingLotId, accessToken) => {
 export const increaseParkingLotCapacity = async (parkingLotId, accessToken) => {
   try {
     await axios.put(
-      `${apiURL}/vigilante/increase-capacidad/${parkingLotId}/`,
+      `${v1URL}/vigilante/increase-capacidad/${parkingLotId}/`,
       {},
       {
         headers: {

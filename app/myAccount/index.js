@@ -42,6 +42,7 @@ export default function myAccountScreen() {
     try {
       await carFeatures(formData, user.access);
       setFeedbackMessage("Datos actualizados exitosamente");
+      reset({ patente: "" }, { fabricante: "" }, { color: "" });
     } catch (error) {
       setFeedbackMessage("No fue posible guardar los datos");
     }
@@ -50,6 +51,7 @@ export default function myAccountScreen() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 

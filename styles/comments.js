@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
     color: colors.text,
     marginHorizontal: wp(3),
     textAlign: "justify",
+    marginVertical: hp(4),
   },
 
   input: {
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     alignSelf: "center",
     textAlignVertical: "top",
-    marginTop: hp(2),
+    marginTop: hp(5),
     borderRadius: 22,
   },
   errorText: {
@@ -107,7 +108,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.main,
     alignSelf: "center",
-    marginTop: hp(8),
+    marginTop: hp(28),
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",

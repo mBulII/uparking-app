@@ -18,20 +18,19 @@ export default function reportHistoryScreen() {
   const [notifications, setNotifications] = useState([]);
   const [cars, setCars] = useState([]);
   const [parkingLots, setParkingLots] = useState([]);
-  useEffect(() => {
-    const fetchAllNotifications = async () => {
-      try {
-        const notificationsData = await fetchNotificationVigilante(user.access);
-        setNotifications(notificationsData);
-      } catch (error) {
-        setFeedbackMessage(
-          "No se pudo obtener los reportes, cerrar sesión y volver a iniciar"
-        );
-        console.error("Error trying to fetch the notifications data:", error);
-      }
-    };
-    fetchAllNotifications();
 
+  const fetchAllNotifications = async () => {
+    try {
+      const notificationsData = await fetchNotificationVigilante(user.access);
+      setNotifications(notificationsData);
+    } catch (error) {
+      setFeedbackMessage(
+        "No se pudo obtener los reportes, cerrar sesión y volver a iniciar"
+      );
+      console.error("Error trying to fetch the notifications data:", error);
+    }
+  };
+  useEffect(() => {
     const fetchCarLicensePlate = async () => {
       try {
         const carsData = await fetchCarFeaturesVigilante(user.access);
@@ -40,8 +39,6 @@ export default function reportHistoryScreen() {
         console.error("Couldn't fetch the parking lots:", error);
       }
     };
-    fetchCarLicensePlate();
-
     const fetchParkingLotName = async () => {
       try {
         const parkingLotsData = await fetchParkingLots(user.access);
@@ -50,6 +47,9 @@ export default function reportHistoryScreen() {
         console.error("Couldn't fetch the parking lots:", error);
       }
     };
+
+    fetchAllNotifications();
+    fetchCarLicensePlate();
     fetchParkingLotName();
   }, []);
 
@@ -90,6 +90,7 @@ export default function reportHistoryScreen() {
   const handleNotificationDelete = async (notificationId) => {
     try {
       await deleteNotificationVigilante(notificationId, user.access);
+      await fetchAllNotifications();
     } catch (error) {
       setFeedbackMessage("No fue posible borrar la notificaion");
     }
@@ -107,31 +108,43 @@ export default function reportHistoryScreen() {
         style={styles.headerLogo}
       />
       {isLoggedIn ? (
-        <ScrollView
-          style={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-        >
-          <Text style={styles.title}>Historial de reporte</Text>
+        notifications.length > 0 ? (
+          <ScrollView
+            style={styles.contentContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            <Text style={styles.title}>Historial de reporte</Text>
 
-          {notifications.map((notification, index) => (
-            <View key={index} style={styles.reportContainer}>
-              <TouchableOpacity
-                style={styles.deleteNotificationContainer}
-                onPress={() => handleNotificationDelete(notification.id)}
-              >
-                <Text style={styles.deleteNotificationText}>Eliminar</Text>
-              </TouchableOpacity>
-              {getIconForMessage(notification.mensaje)}
-              <Text style={styles.reportText}>{notification.mensaje}</Text>
-              <Text style={styles.reportText}>
-                {getLicensePlate(notification.vehiculo)}
-              </Text>
-              <Text style={styles.reportText}>
-                {getParkingLotName(notification.estacionamiento)}
+            {notifications.map((notification, index) => (
+              <View key={index} style={styles.reportContainer}>
+                <TouchableOpacity
+                  style={styles.deleteNotificationContainer}
+                  onPress={() => handleNotificationDelete(notification.id)}
+                >
+                  <Text style={styles.deleteNotificationText}>Eliminar</Text>
+                </TouchableOpacity>
+                {getIconForMessage(notification.mensaje)}
+                <Text style={styles.reportText}>{notification.mensaje}</Text>
+                <Text style={styles.reportText}>
+                  {getLicensePlate(notification.vehiculo)}
+                </Text>
+                <Text style={styles.reportText}>
+                  {getParkingLotName(notification.estacionamiento)}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
+        ) : (
+          <View style={styles.contentContainer}>
+            <Text style={styles.title}>Historial de reporte</Text>
+
+            <View style={styles.noDataContainer}>
+              <Text style={styles.noDataText}>
+                Todavía no se han enviado reportes
               </Text>
             </View>
-          ))}
-        </ScrollView>
+          </View>
+        )
       ) : null}
       <View style={styles.bottomButtonContainer}>
         <TouchableOpacity

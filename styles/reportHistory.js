@@ -80,6 +80,23 @@ export const styles = StyleSheet.create({
     color: colors.bg,
   },
 
+  noDataContainer: {
+    height: hp(25),
+    width: wp(80),
+    borderWidth: 1,
+    borderColor: colors.main,
+    borderRadius: hp(5),
+    padding: 10,
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: hp(15),
+  },
+  noDataText: {
+    fontSize: hp(5),
+    textAlign: "center",
+  },
+
   feedbackContainer: {
     position: "absolute",
     top: hp(30),
