@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -67,13 +68,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    width: wp(80),
-    height: hp(6),
-    borderRadius: 20,
+    width: wp(90),
+    height: hp(7),
     backgroundColor: colors.main,
-    justifyContent: "center",
-    alignItems: "center",
     alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: hp(4),
   },
   buttonText: {
     fontSize: hp(3),
@@ -102,10 +103,10 @@ export const styles = StyleSheet.create({
     top: hp(30),
     left: wp(15),
     backgroundColor: colors.main,
-    borderRadius: 20,
+    borderRadius: hp(3),
     height: hp(40),
     width: wp(70),
-    paddingHorizontal: 10,
+    paddingHorizontal: wp(2),
     justifyContent: "center",
   },
   feedbackText: {

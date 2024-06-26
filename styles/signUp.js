@@ -5,7 +5,7 @@ import { colors } from "../constants/colors";
 export const styles = StyleSheet.create({
   //main container
   container: {
-    flex: 1,
+    flexGrow: 1,
     paddingTop: hp(5),
     backgroundColor: colors.main,
   },
@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
 
   formContainer: {
     backgroundColor: colors.bg,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: hp(3),
+    borderTopLeftRadius: hp(3),
     flex: 1,
     flexDirection: "column",
     marginTop: hp(6),
@@ -40,9 +40,22 @@ export const styles = StyleSheet.create({
     marginLeft: wp(7),
   },
   formGroup: {
-    position: "relative",
-    marginBottom: hp(1.6),
+    marginBottom: hp(1.8),
     alignSelf: "center",
+  },
+  inputContainer: {
+    position: "relative",
+    width: wp(93),
+  },
+  input: {
+    borderWidth: 1,
+    padding: hp(1),
+    paddingLeft: wp(10),
+    color: colors.text,
+    borderColor: colors.grey,
+    borderRadius: hp(2.5),
+    width: "100%",
+    height: hp(5),
   },
   formIcon: {
     fontSize: hp(2.7),
@@ -50,16 +63,8 @@ export const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     left: wp(3.5),
-    top: hp(0.7),
-  },
-  input: {
-    borderWidth: 1,
-    height: hp(4.2),
-    paddingLeft: wp(10),
-    color: colors.text,
-    borderColor: colors.grey,
-    borderRadius: 20,
-    width: wp(93),
+    top: "50%",
+    transform: [{ translateY: -hp(2.7) / 2 }],
   },
   errorText: {
     fontSize: hp(1.5),
@@ -74,10 +79,10 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.main,
     width: wp(93),
     height: hp(4),
-    borderRadius: 50,
+    borderRadius: hp(4),
     borderCurve: "continuous",
     alignItems: "center",
-    marginBottom: hp(1.5),
+    marginBottom: hp(2),
     justifyContent: "center",
   },
   buttonText: {
@@ -87,7 +92,7 @@ export const styles = StyleSheet.create({
   bottomTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: hp(5.3),
+    paddingBottom: hp(5),
   },
   bottomText1: {
     color: colors.grey,
@@ -103,10 +108,10 @@ export const styles = StyleSheet.create({
     top: hp(30),
     left: wp(15),
     backgroundColor: colors.main,
-    borderRadius: 20,
+    borderRadius: hp(3),
     height: hp(40),
     width: wp(70),
-    paddingHorizontal: 10,
+    paddingHorizontal: wp(2),
     justifyContent: "center",
   },
   feedbackText: {

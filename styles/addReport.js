@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -41,7 +42,7 @@ export const styles = StyleSheet.create({
     paddingLeft: wp(3),
     color: colors.text,
     borderColor: colors.grey,
-    borderRadius: hp(3),
+    borderRadius: hp(2.5),
     width: wp(93),
     alignSelf: "center",
     fontSize: hp(1.7),
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
     width: wp(93),
     borderColor: colors.grey,
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: hp(2),
     paddingLeft: wp(3),
   },
   dropdownPlaceholder: {
@@ -127,7 +128,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     textAlignVertical: "top",
     marginTop: hp(2),
-    borderRadius: 22,
+    borderRadius: hp(2),
     fontSize: hp(2),
   },
   errorTextBigInput: {
@@ -188,33 +189,33 @@ export const styles = StyleSheet.create({
   },
 
   bottomButtonContainer: {
-    height: hp(16),
+    height: hp(18),
     backgroundColor: colors.bg,
     justifyContent: "center",
   },
   button1: {
-    width: wp(80),
-    height: hp(6),
-    borderRadius: 20,
+    width: wp(90),
+    height: hp(7),
+    backgroundColor: colors.bg,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: hp(4),
     borderWidth: 1,
     borderColor: colors.main,
-    backgroundColor: colors.bg,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
   },
   button1Text: {
     fontSize: hp(3),
     color: colors.main,
   },
   button2: {
-    width: wp(80),
-    height: hp(6),
-    borderRadius: 20,
+    width: wp(90),
+    height: hp(7),
     backgroundColor: colors.main,
-    justifyContent: "center",
-    alignItems: "center",
     alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: hp(4),
     marginTop: hp(3),
   },
   button2Text: {
@@ -227,10 +228,10 @@ export const styles = StyleSheet.create({
     top: hp(30),
     left: wp(15),
     backgroundColor: colors.main,
-    borderRadius: 20,
+    borderRadius: hp(3),
     height: hp(40),
     width: wp(70),
-    paddingHorizontal: 10,
+    paddingHorizontal: wp(2),
     justifyContent: "center",
   },
   feedbackText: {

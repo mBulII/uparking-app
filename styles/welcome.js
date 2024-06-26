@@ -31,15 +31,14 @@ export const styles = StyleSheet.create({
   button: {
     marginBottom: hp(5),
     backgroundColor: colors.bg,
-    padding: 15,
-    paddingHorizontal: 50,
-    borderRadius:25,
-    borderCurve: "continuous",
-   
+    borderRadius: hp(2),
+    justifyContent: "center",
+    alignItems: "center",
+    width: wp(35),
+    height: hp(8),
   },
   text: {
     color: colors.main,
     fontSize: hp(3),
-    letterSpacing: 1,
   },
 });

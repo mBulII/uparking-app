@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: hp(4),
     borderWidth: 1,
     borderColor: colors.main,
     marginTop: hp(28),
@@ -80,7 +81,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: hp(4),
     marginTop: hp(3),
   },
   button2Text: {

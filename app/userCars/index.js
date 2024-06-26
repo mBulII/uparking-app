@@ -36,7 +36,7 @@ export default function userCarsScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/images/appName.png")}
+        source={require("../../assets/images/appName-white.png")}
         style={styles.headerLogo}
       />
 

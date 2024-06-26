@@ -18,6 +18,7 @@ import {
   manufacturer,
   color,
 } from "../../constants/validation";
+import { Linking } from "react-native";
 
 import { styles } from "../../styles/myAccount";
 
@@ -64,11 +65,16 @@ export default function myAccountScreen() {
     }
   };
 
+  const redirectToWeb = () => {
+    const url = "https://csep.dev/home/user";
+    Linking.openURL(url);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={handleOutside}>
       <View style={styles.container}>
         <Image
-          source={require("../../assets/images/appName.png")}
+          source={require("../../assets/images/appName-white.png")}
           style={styles.headerLogo}
         />
 
@@ -83,6 +89,14 @@ export default function myAccountScreen() {
                 Puedes ver todas tus patentes guardadas
               </Text>
               <TouchableOpacity onPress={() => router.push("userCars")}>
+                <Text style={styles.subHeading2}> aquí</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.subHeadingContainer2}>
+              <Text style={styles.subHeading}>
+                Puedes actualizar los datos de tu cuenta
+              </Text>
+              <TouchableOpacity onPress={() => redirectToWeb()}>
                 <Text style={styles.subHeading2}> aquí</Text>
               </TouchableOpacity>
             </View>

@@ -346,12 +346,22 @@ export default function homeScreen() {
 
   const handleMapButtonPressed = (lot) => {
     setSelectedParkingLot(lot);
-    const { coordinates } = lot.area_espacio;
+    const coordinates = lot.area_espacio.coordinates[0];
+    const centroid = coordinates.reduce(
+      (acc, coord) => {
+        return {
+          latitude: acc.latitude + coord[0],
+          longitude: acc.longitude + coord[1],
+        };
+      },
+      { latitude: 0, longitude: 0 }
+    );
+
     const center = {
-      latitude: coordinates[0][0][0],
-      longitude: coordinates[0][0][1],
-      latitudeDelta: 0.0001,
-      longitudeDelta: 0.0001,
+      latitude: centroid.latitude / coordinates.length,
+      longitude: centroid.longitude / coordinates.length,
+      latitudeDelta: 0.001,
+      longitudeDelta: 0.001,
     };
 
     mapRef.current.animateToRegion(center, 1000);
@@ -370,7 +380,7 @@ export default function homeScreen() {
     };
   };
   const getPolygonColors = (capacidad, capacidad_max, isSelected) => {
-    const borderColor = isSelected ? "#0055B7" : "rgba(0,0,0,0.5)";
+    const borderColor = isSelected ? "#3182CE" : "rgba(0,0,0,0.5)";
     let fillColor;
 
     if (capacidad_max - capacidad <= 2) {
@@ -385,6 +395,15 @@ export default function homeScreen() {
       fillColor: `${fillColor}55`,
       strokeColor: borderColor,
     };
+  };
+  const getMarkerColor = (capacidad, capacidad_max) => {
+    if (capacidad_max - capacidad <= 2) {
+      return "#E55252";
+    } else if (capacidad < capacidad_max / 2) {
+      return "#81F777";
+    } else {
+      return "#DDDE7D";
+    }
   };
 
   const handleSedeSelection = (sedeId) => {
@@ -421,6 +440,12 @@ export default function homeScreen() {
       <Modal animationType="fade" transparent={true}>
         <View style={styles.requestModalBackground}>
           <View style={styles.selectSedeModalContainer}>
+            <TouchableOpacity
+              style={styles.closeSedeModalIconContainer}
+              onPress={() => setOpenSedeModal(false)}
+            >
+              <FontAwesome name="close" style={styles.closeSedeModalIcon} />
+            </TouchableOpacity>
             <Text style={styles.selectSedeModalTitle}>Selecciona tu sede:</Text>
             <ScrollView>
               {sede.map((sedeItem) => (
@@ -554,6 +579,10 @@ export default function homeScreen() {
                     })()}
                     <Marker
                       coordinate={centroid}
+                      pinColor={getMarkerColor(
+                        lot.capacidad,
+                        lot.capacidad_max
+                      )}
                       onPress={() => handleOpenModal(lot)}
                     />
                   </React.Fragment>
@@ -649,6 +678,10 @@ export default function homeScreen() {
                     })()}
                     <Marker
                       coordinate={centroid}
+                      pinColor={getMarkerColor(
+                        lot.capacidad,
+                        lot.capacidad_max
+                      )}
                       onPress={() => handleOpenModal(lot)}
                     />
                   </React.Fragment>
@@ -746,6 +779,7 @@ export default function homeScreen() {
                   })()}
                   <Marker
                     coordinate={centroid}
+                    pinColor={getMarkerColor(lot.capacidad, lot.capacidad_max)}
                     onPress={() => handleOpenModal(lot)}
                   />
                 </React.Fragment>

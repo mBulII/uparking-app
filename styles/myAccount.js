@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -38,6 +39,11 @@ export const styles = StyleSheet.create({
   subHeadingContainer: {
     flexDirection: "row",
     marginLeft: wp(3),
+    marginBottom: hp(1),
+  },
+  subHeadingContainer2: {
+    flexDirection: "row",
+    marginLeft: wp(3),
     marginBottom: hp(4),
   },
   subHeading: {
@@ -58,14 +64,15 @@ export const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    padding: 6.21,
+    padding: hp(1),
     paddingLeft: wp(5),
     color: colors.text,
     borderColor: colors.grey,
-    borderRadius: 20,
+    borderRadius: hp(2.5),
     width: wp(93),
     alignSelf: "center",
     marginBottom: hp(1),
+    height: hp(5),
   },
   errorText: {
     fontSize: hp(1.5),
@@ -79,8 +86,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 12,
-    paddingHorizontal: 10,
+    borderRadius: hp(1.5),
     marginTop: hp(3),
   },
   saveButtonText: {
@@ -95,10 +101,10 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: hp(4),
     borderWidth: 1,
     borderColor: colors.main,
-    marginTop: hp(10),
+    marginTop: hp(8),
   },
   button1Text: {
     fontSize: hp(2),
@@ -111,7 +117,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: hp(4),
     marginTop: hp(3),
   },
   button2Text: {
@@ -124,10 +130,10 @@ export const styles = StyleSheet.create({
     top: hp(30),
     left: wp(15),
     backgroundColor: colors.main,
-    borderRadius: 20,
+    borderRadius: hp(3),
     height: hp(40),
     width: wp(70),
-    paddingHorizontal: 10,
+    paddingHorizontal: wp(2),
     justifyContent: "center",
   },
   feedbackText: {

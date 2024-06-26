@@ -55,22 +55,26 @@ export default function loginScreen() {
 
         <Text style={styles.labelText}>Correo</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="envelope" style={styles.formIcon} />
           <Controller
             control={control}
             name="email"
             rules={email}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Correo"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.toLowerCase().trim())}
-                  autoCapitalize="none"
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Correo"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) =>
+                      onChange(value.toLowerCase().trim())
+                    }
+                    autoCapitalize="none"
+                  />
+                  <FontAwesome name="envelope" style={styles.formIcon} />
+                </View>
                 {errors.email && (
                   <Text style={styles.errorText}>{errors.email.message}</Text>
                 )}
@@ -81,22 +85,24 @@ export default function loginScreen() {
 
         <Text style={styles.labelText}>Contraseña</Text>
         <View style={styles.formGroup}>
-          <FontAwesome5 name="key" style={styles.formIcon} />
           <Controller
             control={control}
             name="password"
             rules={loginPassword}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Contraseña"
-                  placeholderTextColor="#CCCCCC"
-                  secureTextEntry={true}
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Contraseña"
+                    placeholderTextColor="#CCCCCC"
+                    secureTextEntry={true}
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                  />
+                  <FontAwesome5 name="key" style={styles.formIcon} />
+                </View>
                 {errors.password && (
                   <Text style={styles.errorText}>
                     {errors.password.message}

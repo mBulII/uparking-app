@@ -58,21 +58,23 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>RUT</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="user" style={styles.formIcon} />
           <Controller
             control={control}
             name="rut"
             rules={rut}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="RUT"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.trim())}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="RUT"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value.trim())}
+                  />
+                  <FontAwesome name="user" style={styles.formIcon} />
+                </View>
                 {errors.rut && (
                   <Text style={styles.errorText}>{errors.rut.message}</Text>
                 )}
@@ -83,21 +85,23 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Nombre</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="user" style={styles.formIcon} />
           <Controller
             control={control}
             name="p_nombre"
             rules={p_nombre}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Nombre"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.trim())}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Nombre"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value.trim())}
+                  />
+                  <FontAwesome name="user" style={styles.formIcon} />
+                </View>
                 {errors.p_nombre && (
                   <Text style={styles.errorText}>
                     {errors.p_nombre.message}
@@ -110,21 +114,23 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Segundo nombre</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="user" style={styles.formIcon} />
           <Controller
             control={control}
             name="s_nombre"
             rules={s_nombre}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Segundo nombre"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.trim())}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Segundo nombre"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value.trim())}
+                  />
+                  <FontAwesome name="user" style={styles.formIcon} />
+                </View>
                 {errors.s_nombre && (
                   <Text style={styles.errorText}>
                     {errors.s_nombre.message}
@@ -137,21 +143,23 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Apellido</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="user" style={styles.formIcon} />
           <Controller
             control={control}
             name="p_apellido"
             rules={p_apellido}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Apellido"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.trim())}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Apellido"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value.trim())}
+                  />
+                  <FontAwesome name="user" style={styles.formIcon} />
+                </View>
                 {errors.p_apellido && (
                   <Text style={styles.errorText}>
                     {errors.p_apellido.message}
@@ -164,21 +172,23 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Segundo apellido</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="user" style={styles.formIcon} />
           <Controller
             control={control}
             name="s_apellido"
             rules={s_apellido}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Segundo apellido"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.trim())}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Segundo apellido"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value.trim())}
+                  />
+                  <FontAwesome name="user" style={styles.formIcon} />
+                </View>
                 {errors.s_apellido && (
                   <Text style={styles.errorText}>
                     {errors.s_apellido.message}
@@ -191,22 +201,26 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Correo</Text>
         <View style={styles.formGroup}>
-          <FontAwesome name="envelope" style={styles.formIcon} />
           <Controller
             control={control}
             name="email"
             rules={email}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Correo"
-                  placeholderTextColor="#CCCCCC"
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value.toLowerCase().trim())}
-                  autoCapitalize="none"
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Correo"
+                    placeholderTextColor="#CCCCCC"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={(value) =>
+                      onChange(value.toLowerCase().trim())
+                    }
+                    autoCapitalize="none"
+                  />
+                  <FontAwesome name="envelope" style={styles.formIcon} />
+                </View>
                 {errors.email && (
                   <Text style={styles.errorText}>{errors.email.message}</Text>
                 )}
@@ -217,22 +231,24 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Contraseña</Text>
         <View style={styles.formGroup}>
-          <FontAwesome5 name="key" style={styles.formIcon} />
           <Controller
             control={control}
             name="password1"
             rules={signUpPassword}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Contraseña"
-                  placeholderTextColor="#CCCCCC"
-                  secureTextEntry={true}
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Contraseña"
+                    placeholderTextColor="#CCCCCC"
+                    secureTextEntry={true}
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                  />
+                  <FontAwesome5 name="key" style={styles.formIcon} />
+                </View>
                 {errors.password1 && (
                   <Text style={styles.errorText}>
                     {errors.password1.message}
@@ -245,22 +261,24 @@ export default function signUpScreen() {
 
         <Text style={styles.labelText}>Confirmar contraseña</Text>
         <View style={styles.formGroup}>
-          <FontAwesome5 name="key" style={styles.formIcon} />
           <Controller
             control={control}
             name="password2"
             rules={confirmPassword}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Confirmar contraseña"
-                  placeholderTextColor="#CCCCCC"
-                  secureTextEntry={true}
-                  value={value}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                />
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Confirmar contraseña"
+                    placeholderTextColor="#CCCCCC"
+                    secureTextEntry={true}
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                  />
+                  <FontAwesome5 name="key" style={styles.formIcon} />
+                </View>
                 {errors.password2 && (
                   <Text style={styles.errorText}>
                     {errors.password2.message}

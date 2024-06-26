@@ -67,19 +67,20 @@ export default function forgotPasswordScreen() {
               rules={email}
               render={({ field: { onChange, onBlur, value } }) => (
                 <>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Correo"
-                    placeholderTextColor="#CCCCCC"
-                    value={value}
-                    onBlur={onBlur}
-                    onChangeText={(value) =>
-                      onChange(value.toLowerCase().trim())
-                    }
-                    autoCapitalize="none"
-                  />
-                  <FontAwesome name="envelope" style={styles.formIcon} />
-
+                  <View style={styles.inputContainer}>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Correo"
+                      placeholderTextColor="#CCCCCC"
+                      value={value}
+                      onBlur={onBlur}
+                      onChangeText={(value) =>
+                        onChange(value.toLowerCase().trim())
+                      }
+                      autoCapitalize="none"
+                    />
+                    <FontAwesome name="envelope" style={styles.formIcon} />
+                  </View>
                   {errors.email && (
                     <Text style={styles.errorText}>{errors.email.message}</Text>
                   )}

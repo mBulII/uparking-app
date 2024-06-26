@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -35,7 +36,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: colors.accent,
-    borderRadius: 20,
+    borderRadius: hp(2),
     alignSelf: "center",
     justifyContent: "center",
     marginTop: hp(5),
@@ -53,13 +54,13 @@ export const styles = StyleSheet.create({
   },
 
   button: {
-    width: wp(80),
-    height: hp(6),
-    borderRadius: 20,
+    width: wp(90),
+    height: hp(7),
     backgroundColor: colors.main,
-    justifyContent: "center",
-    alignItems: "center",
     alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: hp(4),
     marginTop: hp(15),
   },
   buttonText: {

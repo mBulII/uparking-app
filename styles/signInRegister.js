@@ -18,11 +18,11 @@ export const styles = StyleSheet.create({
 
   formContainer: {
     backgroundColor: colors.bg,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: hp(3),
+    borderTopLeftRadius: hp(3),
     flex: 1,
     flexDirection: "column",
-    marginTop:hp(6)
+    marginTop: hp(6),
   },
   formTitle: {
     color: colors.text,
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     borderColor: colors.main,
     width: wp(90),
     height: hp(8),
-    borderRadius: 50,
+    borderRadius: hp(4),
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.main,
     width: wp(90),
     height: hp(8),
-    borderRadius: 50,
+    borderRadius: hp(4),
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",

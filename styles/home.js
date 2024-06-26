@@ -95,6 +95,13 @@ export const styles = StyleSheet.create({
     borderRadius: hp(4),
     alignItems: "center",
   },
+  closeSedeModalIconContainer: {
+    alignSelf: "flex-end",
+  },
+  closeSedeModalIcon: {
+    fontSize: hp(3),
+    color: colors.red,
+  },
   selectSedeModalTitle: {
     textAlign: "center",
     fontSize: hp(4),
@@ -365,13 +372,13 @@ export const styles = StyleSheet.create({
 
   feedbackContainer: {
     position: "absolute",
-    top: hp(10),
+    top: hp(30),
     left: wp(15),
     backgroundColor: colors.main,
-    borderRadius: 20,
+    borderRadius: hp(3),
     height: hp(40),
     width: wp(70),
-    paddingHorizontal: 10,
+    paddingHorizontal: wp(2),
     justifyContent: "center",
   },
   feedbackText: {

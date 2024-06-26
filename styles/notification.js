@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -81,7 +82,6 @@ export const styles = StyleSheet.create({
   noNotificationBox: {
     width: wp(90),
     height: hp(22),
-    padding: 10,
     borderWidth: 1,
     borderColor: colors.accent,
     borderRadius: hp(4),
