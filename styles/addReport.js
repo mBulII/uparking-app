@@ -228,7 +228,7 @@ export const styles = StyleSheet.create({
     left: wp(15),
     backgroundColor: colors.main,
     borderRadius: 20,
-    height: hp(30),
+    height: hp(40),
     width: wp(70),
     paddingHorizontal: 10,
     justifyContent: "center",

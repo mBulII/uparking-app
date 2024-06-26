@@ -10,14 +10,13 @@ export const styles = StyleSheet.create({
   },
   container: {
     paddingTop: hp(5),
-    backgroundColor: colors.main,
+    backgroundColor: colors.bg,
   },
 
   headerLogo: {
     height: hp(8),
-    width: wp(50),
+    width: wp(70),
     marginLeft: wp(3),
-    color: colors.main,
   },
 
   contentContainer: {
@@ -334,7 +333,7 @@ export const styles = StyleSheet.create({
   },
 
   navbarContainer2: {
-    backgroundColor: colors.main,
+    backgroundColor: colors.bg,
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -347,7 +346,7 @@ export const styles = StyleSheet.create({
     width: wp(100),
   },
   navbarContainer: {
-    backgroundColor: colors.main,
+    backgroundColor: colors.bg,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -361,7 +360,7 @@ export const styles = StyleSheet.create({
   },
   navbarIcon: {
     fontSize: hp(5),
-    color: colors.bg,
+    color: colors.main,
   },
 
   feedbackContainer: {
@@ -370,7 +369,7 @@ export const styles = StyleSheet.create({
     left: wp(15),
     backgroundColor: colors.main,
     borderRadius: 20,
-    height: hp(30),
+    height: hp(40),
     width: wp(70),
     paddingHorizontal: 10,
     justifyContent: "center",

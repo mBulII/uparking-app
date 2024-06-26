@@ -9,20 +9,13 @@ export const styles = StyleSheet.create({
     paddingTop: hp(5),
     backgroundColor: colors.main,
   },
-
   image: {
+    resizeMode: "repeat",
+    alignSelf: "center",
     height: hp(10),
     width: wp(100),
-    marginTop: hp(11),
+    marginTop: hp(40),
   },
-
-  gradient: {
-    position: "absolute",
-    width: wp(100),
-    height: hp(50),
-    bottom: 0,
-  },
-
   bottomContent: {
     flex: 1,
     alignItems: "center",
@@ -30,20 +23,22 @@ export const styles = StyleSheet.create({
     gap: 14,
   },
   appImage: {
-    height: hp(10),
-    width: wp(80),
-    marginBottom: hp(22),
+    height: hp(8),
+    resizeMode: "contain",
+    width: wp(70),
+    marginBottom: hp(60),
   },
   button: {
     marginBottom: hp(5),
-    backgroundColor: colors.main,
+    backgroundColor: colors.bg,
     padding: 15,
-    paddingHorizontal: 90,
-    borderRadius: 50,
+    paddingHorizontal: 50,
+    borderRadius:25,
     borderCurve: "continuous",
+   
   },
   text: {
-    color: colors.bg,
+    color: colors.main,
     fontSize: hp(3),
     letterSpacing: 1,
   },

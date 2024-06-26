@@ -15,12 +15,6 @@ export const styles = StyleSheet.create({
     color: colors.bg,
     marginLeft: wp(3),
   },
-  headerLogo: {
-    height: hp(10),
-    width: wp(70),
-    marginTop: hp(3),
-    alignSelf: "center",
-  },
 
   formContainer: {
     backgroundColor: colors.bg,
@@ -28,6 +22,7 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     flex: 1,
     flexDirection: "column",
+    marginTop: hp(6),
   },
   formTitle: {
     color: colors.text,
@@ -52,17 +47,8 @@ export const styles = StyleSheet.create({
     marginLeft: wp(7),
   },
   formGroup: {
-    position: "relative",
     marginBottom: hp(1.8),
     alignSelf: "center",
-  },
-  formIcon: {
-    fontSize: hp(2.7),
-    color: colors.main,
-    position: "absolute",
-    zIndex: 1,
-    left: wp(3.5),
-    top: hp(1),
   },
   input: {
     borderWidth: 1,
@@ -72,6 +58,15 @@ export const styles = StyleSheet.create({
     borderColor: colors.grey,
     borderRadius: 20,
     width: wp(93),
+    position: "relative",
+  },
+  formIcon: {
+    fontSize: hp(2.7),
+    color: colors.main,
+    zIndex: 1,
+    position: "absolute",
+    left: wp(3.5),
+    top: 1,
   },
   errorText: {
     fontSize: hp(1.5),
@@ -111,7 +106,7 @@ export const styles = StyleSheet.create({
     left: wp(15),
     backgroundColor: colors.main,
     borderRadius: 20,
-    height: hp(30),
+    height: hp(40),
     width: wp(70),
     paddingHorizontal: 10,
     justifyContent: "center",

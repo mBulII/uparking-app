@@ -37,7 +37,7 @@ export default function welcomeScreen() {
       />
       <View style={styles.bottomContent}>
         <Image
-          source={require("../assets/images/appName.png")}
+          source={require("../assets/images/appName-white.png")}
           style={styles.appImage}
         />
         <TouchableOpacity

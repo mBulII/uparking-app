@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
 
   headerLogo: {
-    height: hp(8),
+    height: hp(4.6),
     width: wp(50),
     marginLeft: wp(3),
+    marginBottom: hp(2),
   },
 
   contentContainer: {
@@ -139,7 +140,7 @@ export const styles = StyleSheet.create({
     left: wp(15),
     backgroundColor: colors.main,
     borderRadius: 20,
-    height: hp(30),
+    height: hp(40),
     width: wp(70),
     paddingHorizontal: 10,
     justifyContent: "center",

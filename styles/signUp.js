@@ -15,12 +15,6 @@ export const styles = StyleSheet.create({
     color: colors.bg,
     marginLeft: wp(3),
   },
-  headerLogo: {
-    height: hp(10),
-    width: wp(70),
-    marginTop: hp(3),
-    alignSelf: "center",
-  },
 
   formContainer: {
     backgroundColor: colors.bg,
@@ -28,6 +22,7 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     flex: 1,
     flexDirection: "column",
+    marginTop: hp(6),
   },
   formTitle: {
     color: colors.text,
@@ -109,7 +104,7 @@ export const styles = StyleSheet.create({
     left: wp(15),
     backgroundColor: colors.main,
     borderRadius: 20,
-    height: hp(30),
+    height: hp(40),
     width: wp(70),
     paddingHorizontal: 10,
     justifyContent: "center",

@@ -52,10 +52,6 @@ export default function forgotPasswordScreen() {
         <TouchableOpacity onPress={() => router.push("home")}>
           <FontAwesome name="home" style={styles.headerIcon} />
         </TouchableOpacity>
-        <Image
-          source={require("../../assets/images/appName.png")}
-          style={styles.headerLogo}
-        />
 
         <View style={styles.formContainer}>
           <Text style={styles.formTitle}>RECUPERAR CONTRASEÑA</Text>
@@ -65,7 +61,6 @@ export default function forgotPasswordScreen() {
 
           <Text style={styles.labelText}>Correo</Text>
           <View style={styles.formGroup}>
-            <FontAwesome name="envelope" style={styles.formIcon} />
             <Controller
               control={control}
               name="email"
@@ -83,6 +78,8 @@ export default function forgotPasswordScreen() {
                     }
                     autoCapitalize="none"
                   />
+                  <FontAwesome name="envelope" style={styles.formIcon} />
+
                   {errors.email && (
                     <Text style={styles.errorText}>{errors.email.message}</Text>
                   )}

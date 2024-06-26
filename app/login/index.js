@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   ScrollView,
   TextInput,
@@ -50,10 +49,6 @@ export default function loginScreen() {
       <TouchableOpacity onPress={() => router.push("home")}>
         <FontAwesome name="home" style={styles.headerIcon} />
       </TouchableOpacity>
-      <Image
-        source={require("../../assets/images/appName.png")}
-        style={styles.headerLogo}
-      />
 
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>INGRESAR</Text>
