@@ -21,10 +21,6 @@ const Layout = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="resetPassword/index"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
             name="comments/index"
             options={{ headerShown: false }}
           />

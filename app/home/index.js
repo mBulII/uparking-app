@@ -63,9 +63,7 @@ export default function homeScreen() {
     fetchParkingLotAndSedesData();
     checkPermission();
 
-    websocketRef.current = new WebSocket(
-      "ws://192.168.43.74/ws/estacionamientos"
-    );
+    websocketRef.current = new WebSocket("wss://Csep.dev/ws/estacionamientos");
     websocketRef.current.onopen = () => {};
     websocketRef.current.onmessage = () => {
       fetchParkingLotAndSedesData();
