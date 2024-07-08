@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { registerUser } from "../../constants/api";
@@ -25,12 +26,14 @@ import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 export default function signUpScreen() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {
     setFeedbackMessage("");
   };
 
   const handleAccountCreation = async (formData) => {
+    setLoading(true);
     try {
       await registerUser(formData);
       setFeedbackMessage(
@@ -38,6 +41,8 @@ export default function signUpScreen() {
       );
     } catch (error) {
       setFeedbackMessage("No se pudo crear tu cuenta, intentalo denuevo");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -294,7 +299,11 @@ export default function signUpScreen() {
             style={styles.button}
             onPress={handleSubmit(handleAccountCreation)}
           >
-            <Text style={styles.buttonText}>Crear Cuenta</Text>
+            {loading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.buttonText}>Crear Cuenta</Text>
+            )}
           </TouchableOpacity>
         </View>
         <View style={styles.bottomTextContainer}>

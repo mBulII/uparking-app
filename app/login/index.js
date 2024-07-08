@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
@@ -20,12 +21,14 @@ export default function loginScreen() {
   const router = useRouter();
   const { setUser } = useStore();
   tokenRefresh();
+  const [loading, setLoading] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const onTouch = () => {
     setFeedbackMessage("");
   };
 
   const handleAccountLogin = async (formData) => {
+    setLoading(true);
     try {
       const response = await loginUser(formData);
       const userData = response;
@@ -35,6 +38,8 @@ export default function loginScreen() {
       setFeedbackMessage(
         "Los datos proporcionados no son válidos o la cuenta no esta verificada"
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,8 +128,13 @@ export default function loginScreen() {
           <TouchableOpacity
             style={styles.button}
             onPress={handleSubmit(handleAccountLogin)}
+            disabled={loading}
           >
-            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+            {loading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.buttonText}>Iniciar Sesión</Text>
+            )}
           </TouchableOpacity>
         </View>
         <View style={styles.bottomTextContainer}>
