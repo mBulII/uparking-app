@@ -291,8 +291,8 @@ export default function homeScreen() {
                 {" "}
                 {selectedParkingLot.nombre}
               </Text>
-              <MaterialCommunityIcons name={name} style={style} />
             </View>
+            <MaterialCommunityIcons name={name} style={style} />
 
             <View style={styles.modalTextContainer}>
               <Text style={styles.modalText}>
@@ -411,7 +411,7 @@ export default function homeScreen() {
     const filteredLots = parkingLot.filter((lot) => lot.sede === sedeId);
     setFilteredParkingLots(filteredLots);
 
-    if (sedeId === "1") {
+    if (sedeId === "CH") {
       mapRef.current.animateToRegion(
         {
           latitude: -40.58603418460478,
@@ -421,7 +421,7 @@ export default function homeScreen() {
         },
         1000
       );
-    } else if (sedeId === "2") {
+    } else if (sedeId === "MY") {
       mapRef.current.animateToRegion(
         {
           latitude: -40.597567817892546,
@@ -578,6 +578,7 @@ export default function homeScreen() {
                       );
                     })()}
                     <Marker
+                      key={`${lot.id}-${lot.capacidad}`}
                       coordinate={centroid}
                       pinColor={getMarkerColor(
                         lot.capacidad,
@@ -677,6 +678,7 @@ export default function homeScreen() {
                       );
                     })()}
                     <Marker
+                      key={`${lot.id}-${lot.capacidad}`}
                       coordinate={centroid}
                       pinColor={getMarkerColor(
                         lot.capacidad,
@@ -778,6 +780,7 @@ export default function homeScreen() {
                     );
                   })()}
                   <Marker
+                    key={`${lot.id}-${lot.capacidad}`}
                     coordinate={centroid}
                     pinColor={getMarkerColor(lot.capacidad, lot.capacidad_max)}
                     onPress={() => handleOpenModal(lot)}

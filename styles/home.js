@@ -227,10 +227,12 @@ export const styles = StyleSheet.create({
     width: wp(100),
     borderTopLeftRadius: hp(4),
     borderTopRightRadius: hp(4),
+    position: "relative",
   },
   modalTitleContainer: {
     flexDirection: "row",
-    marginTop: hp(3),
+    marginTop: hp(1),
+    marginBottom: hp(2),
   },
   modalTitle1: {
     fontSize: hp(3),
@@ -243,17 +245,23 @@ export const styles = StyleSheet.create({
   modalRedIcon: {
     fontSize: hp(7),
     color: colors.red,
-    marginLeft: wp(10),
+    position: "absolute",
+    right: wp(3),
+    top: hp(1),
   },
   modalYellowIcon: {
     fontSize: hp(7),
     color: colors.yellow,
-    marginLeft: wp(10),
+    position: "absolute",
+    right: wp(3),
+    top: hp(1),
   },
   modalGreenIcon: {
     fontSize: hp(7),
     color: colors.green,
-    marginLeft: wp(10),
+    position: "absolute",
+    right: wp(3),
+    top: hp(1),
   },
   modalTextContainer: {
     flexDirection: "row",
@@ -309,19 +317,19 @@ export const styles = StyleSheet.create({
   modalCapacityMessageRed: {
     fontSize: hp(4),
     color: colors.red,
-    marginTop: hp(8),
+    marginTop: hp(5),
     textAlign: "center",
   },
   modalCapacityMessageYellow: {
     fontSize: hp(4),
     color: colors.yellow,
-    marginTop: hp(8),
+    marginTop: hp(5),
     textAlign: "center",
   },
   modalCapacityMessageGreen: {
     fontSize: hp(4),
     color: colors.green,
-    marginTop: hp(8),
+    marginTop: hp(5),
     textAlign: "center",
   },
   modalCloseButton: {
@@ -332,7 +340,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: hp(9),
+    marginTop: hp(8),
   },
   modalCloseButtonText: {
     fontSize: hp(2),
